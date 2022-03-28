@@ -1,9 +1,11 @@
+# Planning
+
 Gui to chose options and input
 
 Translation feature
 
 Options:
-  Input labguage selection
+  Input language selection
     Autodetect default
   Output language selection
     English default
