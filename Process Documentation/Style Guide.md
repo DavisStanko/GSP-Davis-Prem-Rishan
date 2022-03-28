@@ -1,3 +1,5 @@
+# Style Guide
+
 Camel Case
 
 Functional Programming

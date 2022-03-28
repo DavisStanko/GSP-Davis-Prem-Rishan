@@ -1,16 +1,17 @@
-Brainstorm (informal)
+# Brainstorm
 
-Chatbot
+Chatbot?
 
-Converters
+Converters?
 
-Translator
+Translator?
   Text to Speech
+  Speech to text input!??!
 
-https://www.google.com/search?client=safari&rls=en&q=text+to+speeach+python+proooject&ie=UTF-8&oe=UTF-8
+<https://www.google.com/search?client=safari&rls=en&q=text+to+speeach+python+proooject&ie=UTF-8&oe=UTF-8>
 
-
-Gui
+Gui?
   Tkinter (ugly)
+    Tkinter themes??
 
-  PyQT
+  PyQT (Hard to use)

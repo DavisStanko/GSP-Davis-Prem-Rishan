@@ -1,3 +1,5 @@
+# Project Specifications
+
 Google TTS
 
 Playsound
