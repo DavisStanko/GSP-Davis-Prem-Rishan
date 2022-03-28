@@ -43,6 +43,7 @@ def speak():
 
 root = Tk()
 root.geometry("700x500")
+root.title("Translate")
 root.resizable(False, False)
 
 prompt = Label(text="Enter Your Birthday:")
