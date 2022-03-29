@@ -2,7 +2,6 @@
 # to speech conversion
 from tkinter import *
 import tkinter.ttk as ttk
-import PIL
 from gtts import gTTS
 from deep_translator import GoogleTranslator
 import playsound
