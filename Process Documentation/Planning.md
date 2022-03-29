@@ -1,17 +1,15 @@
 # Planning
 
-Gui to chose options and input
+Translator
 
-Translation feature
+- Dropdown menu to chose output
+  - English default
+  - Output speech accent = output lang
 
-Options:
-  Input language selection
-    Autodetect default
-  Output language selection
-    English default
-  Accent selection
-    American english default
-  
-TTS output
+- Auto detect input
 
-Text output
+- Dark/Light mode
+
+- Submit button
+  - Autoplay speech
+  - Display text
