@@ -28,7 +28,7 @@ def speak():
 
     result.config(text=output, fg="white")
 
-    # Passing the text and language to the engine,
+    # Passing the text and language to the engine, sss
     # here we have marked slow=False. Which tells
     # the module that the converted audio should
     myobj = gTTS(text=output, slow=False)
