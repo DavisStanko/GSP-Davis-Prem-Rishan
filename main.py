@@ -7,6 +7,8 @@ from deep_translator import GoogleTranslator
 import playsound
 
 ttk.output = ""
+
+
 def lang_options():
     global output
     option = option_variable.get()
@@ -22,6 +24,7 @@ def lang_options():
     elif option == "Mandarin":
         # translator
         ttk.output = GoogleTranslator(source='auto', target="zh-CN").translate(entry.get())
+
 
 def speak():
     lang_options()
@@ -41,17 +44,17 @@ def speak():
     playsound.playsound('speech.mp3', True)
 
 
-
 root = Tk()
 
 root.geometry("700x500")
 root.title("Translate")
 root.resizable(False, False)
 
-#Dark/Light mode toggle
+# Dark/Light mode toggle
 is_on = True
 
-def switch() :
+
+def switch():
     global is_on
 
     # Determine is on or off
@@ -63,7 +66,6 @@ def switch() :
         onButton.config(image=on)
         is_on = True
         root.tk.call("set_theme", "dark")
-
 
 
 # Define Our Images
@@ -80,13 +82,13 @@ root.tk.call("set_theme", "dark")
 
 
 labelTittle = ttk.Label(root, text="Translator", font=('Helvetica', 32, 'underline'))
-labelTittle.place(x=250, y= 25)
+labelTittle.place(x=250, y=25)
 
 # prompt = Label(text="Enter Your Birthday:")
 
 # copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
-#stuff like googletrans and messagebox could be useful https://codingshiksha.com/python/python-tkinter-gui-script-to-make-language-translate-app-using-google-translate-api-full-project-for-beginners/
-#Flag stuff in options https://morioh.com/p/f900651c5e48
+# stuff like googletrans and messagebox could be useful https://codingshiksha.com/python/python-tkinter-gui-script-to-make-language-translate-app-using-google-translate-api-full-project-for-beginners/
+# Flag stuff in options https://morioh.com/p/f900651c5e48
 
 
 entryValue = StringVar()
@@ -105,6 +107,3 @@ result = Label(text="", fg="white")
 result.place(x=50, y=250)
 
 root.mainloop()
-
-
-
