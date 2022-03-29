@@ -6,32 +6,32 @@ from gtts import gTTS
 from deep_translator import GoogleTranslator
 import playsound
 
-output = ""
+ttk.output = ""
 def lang_options():
     global output
     option = option_variable.get()
     if option == "English":
         # translator
-        output = GoogleTranslator(source='auto', target="en").translate(entry.get())
+        ttk.output = GoogleTranslator(source='auto', target="en").translate(entry.get())
     elif option == "French":
         # translator
-        output = GoogleTranslator(source='auto', target="fr").translate(entry.get())
+        ttk.output = GoogleTranslator(source='auto', target="fr").translate(entry.get())
     elif option == "Spanish":
         # translator
-        output = GoogleTranslator(source='auto', target="es").translate(entry.get())
+        ttk.output = GoogleTranslator(source='auto', target="es").translate(entry.get())
     elif option == "Mandarin":
         # translator
-        output = GoogleTranslator(source='auto', target="zh-CN").translate(entry.get())
+        ttk.output = GoogleTranslator(source='auto', target="zh-CN").translate(entry.get())
 
 def speak():
     lang_options()
 
-    result.config(text=output, fg="white")
+    result.config(text=ttk.output)
 
     # Passing the text and language to the engine,
     # here we have marked slow=False. Which tells
     # the module that the converted audio should
-    myobj = gTTS(text=output, slow=False)
+    myobj = gTTS(text=ttk.output, slow=False)
 
     # Saving the converted audio in a mp3 file named
     # welcome
