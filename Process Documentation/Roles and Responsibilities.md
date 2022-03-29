@@ -1,12 +1,12 @@
 # Roles and Responsibilities
 
 Rishan
-  Backend
+- Backend
 
 Prem
-  Frontend
+- Frontend
 
 Davis
-  Git
-  Documentation
-  General help
+- Git
+- Documentation
+- Some backend
