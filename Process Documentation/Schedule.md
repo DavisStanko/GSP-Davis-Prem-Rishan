@@ -15,3 +15,7 @@ Make GUI pretty
 - theme switcher implemented
 
 Fix accent
+
+Follow style guide
+
+Update testing docs
