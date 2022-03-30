@@ -25,7 +25,7 @@ def submit():  # Translate and display the text
     playsound.playsound('speech.mp3', True)  # Playing the converted file
 
 
-def clear():  # Clear the text
+def clear():  # Clear both text boxes
     entry.delete(1.0, 'end')
     result.config(text="")
 
