@@ -98,7 +98,7 @@ option_variable.set("English")
 entry = ttk.Entry(root, textvariable=entryValue, font=('Helvetica'), width=20)
 entry.place(x=50, y=100)
 # , width=20, bd=3, font=20, bg="#5B5750", fg="#FFF1BF"
-options = ttk.OptionMenu(root, option_variable, "English", "French", "Spanish", "Mandarin")
+options = ttk.OptionMenu(root, option_variable, "English", "English", "French", "Spanish", "Mandarin")
 options.place(x=450, y=105)
 
 speak = ttk.Button(text="Speak", command=speak).place(x=325, y=450)
