@@ -4,8 +4,6 @@ from gtts import gTTS #Google text to speech
 from deep_translator import GoogleTranslator # Google Translator
 import playsound # Play speech
 
-ttk.output = ""
-
 choose_langauge = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian',
                    'az': 'azerbaijani', 'eu': 'basque', 'be': 'belarusian', 'bn': 'bengali', 'bs': 'bosnian',
                    'bg': 'bulgarian', 'ca': 'catalan', 'ceb': 'cebuano', 'ny': 'chichewa',
