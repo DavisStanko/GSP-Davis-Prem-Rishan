@@ -1,11 +1,8 @@
-# Import the required module for text
-# to speech conversion
-from tkinter import *
-import tkinter.ttk as ttk
-from gtts import gTTS
-from deep_translator import GoogleTranslator
-import playsound
-import textwrap
+from tkinter import * #GUI
+import tkinter.ttk as ttk #Themes
+from gtts import gTTS #Google text to speech
+from deep_translator import GoogleTranslator # Google Translator
+import playsound # Play speech
 
 ttk.output = ""
 
