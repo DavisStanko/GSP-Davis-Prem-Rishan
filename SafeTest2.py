@@ -3,11 +3,120 @@
 from tkinter import *
 import tkinter.ttk as ttk
 from gtts import gTTS
-import PIL
 from deep_translator import GoogleTranslator
 import playsound
 
 ttk.output = ""
+
+choose_langauge = [
+    'Afrikaans',
+    'Albanian',
+    'Arabic',
+    'Armenian',
+    ' Azerbaijani',
+    'Basque',
+    'Belarusian',
+    'Bengali',
+    'Bosnian',
+    'Bulgarian',
+    ' Catalan',
+    'Cebuano',
+    'Chichewa',
+    'Chinese',
+    'Corsican',
+    'Croatian',
+    ' Czech',
+    'Danish',
+    'Dutch',
+    'English',
+    'Esperanto',
+    'Estonian',
+    'Filipino',
+    'Finnish',
+    'French',
+    'Frisian',
+    'Galician',
+    'Georgian',
+    'German',
+    'Greek',
+    'Gujarati',
+    'Haitian Creole',
+    'Hausa',
+    'Hawaiian',
+    'Hebrew',
+    'Hindi',
+    'Hmong',
+    'Hungarian',
+    'Icelandic',
+    'Igbo',
+    'Indonesian',
+    'Irish',
+    'Italian',
+    'Japanese',
+    'Javanese',
+    'Kannada',
+    'Kazakh',
+    'Khmer',
+    'Kinyarwanda',
+    'Korean',
+    'Kurdish',
+    'Kyrgyz',
+    'Lao',
+    'Latin',
+    'Latvian',
+    'Lithuanian',
+    'Luxembourgish',
+    'Macedonian',
+    'Malagasy',
+    'Malay',
+    'Malayalam',
+    'Maltese',
+    'Maori',
+    'Marathi',
+    'Mongolian',
+    'Myanmar',
+    'Nepali',
+    'Norwegian'
+    'Odia',
+    'Pashto',
+    'Persian',
+    'Polish',
+    'Portuguese',
+    'Punjabi',
+    'Romanian',
+    'Russian',
+    'Samoan',
+    'Scots Gaelic',
+    'Serbian',
+    'Sesotho',
+    'Shona',
+    'Sindhi',
+    'Sinhala',
+    'Slovak',
+    'Slovenian',
+    'Somali',
+    'Spanish',
+    'Sundanese',
+    'Swahili',
+    'Swedish',
+    'Tajik',
+    'Tamil',
+    'Tatar',
+    'Telugu',
+    'Thai',
+    'Turkish',
+    'Turkmen',
+    'Ukrainian',
+    'Urdu',
+    'Uyghur',
+    'Uzbek',
+    'Vietnamese',
+    'Welsh',
+    'Xhosa'
+    'Yiddish',
+    'Yoruba',
+    'Zulu',
+]
 
 
 def lang_options():
@@ -110,7 +219,6 @@ entry = Text(root, width=30, height=10, borderwidth=5, relief=RIDGE)
 entry.place(x=10, y=100)
 
 
-<<<<<<< HEAD
 options = ttk.OptionMenu(root, option_variable, 'Afrikaans',
                          'Albanian',
                          'Arabic',
@@ -218,9 +326,6 @@ options = ttk.OptionMenu(root, option_variable, 'Afrikaans',
                          'Yiddish',
                          'Yoruba',
                          'Zulu',)
-=======
-options = ttk.OptionMenu(root, option_variable, "English", "English", "French", "Spanish", "Mandarin")
->>>>>>> b4f86c07f0e859a54c0177b25a5ffc75d8350000
 options.place(x=550, y=105)
 
 
