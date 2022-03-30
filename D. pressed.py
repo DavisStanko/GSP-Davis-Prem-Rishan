@@ -30,9 +30,9 @@ def clear() :
     t2.delete(1.0, 'end')
 
 
-img = ImageTk.PhotoImage(Image.open('translator.png'))
-label = Label(image=img)
-label.place(x=230, y=3)
+# img = ImageTk.PhotoImage(Image.open('translator.png'))
+# label = Label(image=img)
+# label.place(x=230, y=3)
 
 a = tk.StringVar()
 auto_detect = ttk.Combobox(root, width=20, textvariable=a, state='readonly', font=('verdana', 10, 'bold'), )
