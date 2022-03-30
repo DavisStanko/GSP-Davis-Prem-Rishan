@@ -38,7 +38,7 @@ def submit():  # Translate and display the text
     lang = get_key(option_variable.get())  # Get the output language
     ttk.output = GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))  # Translate the text
     result.config(text=ttk.output)
-    myobj = gTTS(text=ttk.output, slow=False, tld='com.au')  # Passing the text and language, speed, and accent to gtts
+    myobj = gTTS(text=ttk.output, slow=False, lang=lang)  # Passing the text and language, speed, and accent to gtts
     myobj.save("speech.mp3")  # Saving the converted audio in an mp3 file
     playsound.playsound('speech.mp3', True)  # Playing the converted file
 
