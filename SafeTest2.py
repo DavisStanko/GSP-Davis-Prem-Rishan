@@ -10,7 +10,6 @@ import playsound
 ttk.output = ""
 
 
-
 def lang_options():
     global output
     option = option_variable.get()
@@ -45,7 +44,8 @@ def speak():
     # Playing the converted file
     playsound.playsound('speech.mp3', True)
 
-def clear() :
+
+def clear():
     entry.delete(1.0, 'end')
     result.config(text="")
 
@@ -70,6 +70,7 @@ def switch():
         copy.config(image=copyDark)
 
 #
+
 
 root = Tk()
 
@@ -120,14 +121,14 @@ result = Label(root, width=30, height=10, borderwidth=5, relief=RIDGE)
 result.place(x=260, y=100)
 
 clear = ttk.Button(root, text="Clear", cursor="hand2",
-               command=clear)
+                   command=clear)
 clear.place(x=280, y=300)
 
 copyDark = PhotoImage(file="copy-d.png")
 copyLight = PhotoImage(file="copy-l.png")
 
 copy = Button(root, image=copyDark, bd=0, cursor="hand2",
-               command=copy)
+              command=copy)
 copy.place(x=180, y=300)
 
 
