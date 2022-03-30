@@ -72,28 +72,27 @@ def copy(): # Copy the text
 
 
 def switch(): # Switch the theme
-    global is_on
-    if is_on:
+    global dark_mode
+    if dark_mode:
         onButton.config(image=off)
-        is_on = False
+        dark_mode = False
         window.tk.call("set_theme", "light")
         copy.config(image=copyLight)
     else:
         onButton.config(image=on)
-        is_on = True
+        dark_mode = True
         window.tk.call("set_theme", "dark")
         copy.config(image=copyDark)
 
 
 
-window = Tk()
-
-window.geometry("700x500")
-window.title("Translate")
-window.resizable(False, False)
+window = Tk() # Create the window
+window.geometry("700x500") # Set the size
+window.title("Translate") # Set the title
+window.resizable(False, False) # Disable resizing
 
 # Dark/Light mode toggle
-is_on = True
+dark_mode = True
 on = PhotoImage(file="dark.png")
 off = PhotoImage(file="light.png")
 
