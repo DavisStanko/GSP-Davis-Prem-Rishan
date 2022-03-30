@@ -110,6 +110,7 @@ entry = Text(root, width=30, height=10, borderwidth=5, relief=RIDGE)
 entry.place(x=10, y=100)
 
 
+<<<<<<< HEAD
 options = ttk.OptionMenu(root, option_variable, 'Afrikaans',
                          'Albanian',
                          'Arabic',
@@ -217,13 +218,16 @@ options = ttk.OptionMenu(root, option_variable, 'Afrikaans',
                          'Yiddish',
                          'Yoruba',
                          'Zulu',)
+=======
+options = ttk.OptionMenu(root, option_variable, "English", "English", "French", "Spanish", "Mandarin")
+>>>>>>> b4f86c07f0e859a54c0177b25a5ffc75d8350000
 options.place(x=550, y=105)
 
 
 speak = ttk.Button(text="Speak", command=speak).place(x=325, y=450)
 
 
-result = Label(root, width=30, height=10, borderwidth=5, relief=RIDGE)
+result = Label(root, width=30, height=10, anchor=NW, borderwidth=5, relief=RIDGE)
 result.place(x=260, y=100)
 
 clear = ttk.Button(root, text="Clear", cursor="hand2",
