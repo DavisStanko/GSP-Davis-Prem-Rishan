@@ -9,6 +9,7 @@ import playsound
 ttk.output = ""
 
 
+
 def lang_options():
     global output
     option = option_variable.get()
@@ -43,6 +44,19 @@ def speak():
     # Playing the converted file
     playsound.playsound('speech.mp3', True)
 
+def clear() :
+    entry.delete(1.0, 'end')
+    result.config(text="")
+
+
+def copy():
+    global output
+    root.clipboard_clear()
+    root.clipboard_append(result["text"])
+
+
+
+#
 
 root = Tk()
 
@@ -109,6 +123,14 @@ submit = ttk.Button(text="Speak", command=speak).place(x=325, y=450)
 # result.place(x=50, y=250)
 result = Label(root, width=30, height=10, borderwidth=5, relief=RIDGE)
 result.place(x=260, y=100)
+
+clear = ttk.Button(root, text="Clear", cursor="hand2",
+               command=clear)
+clear.place(x=280, y=300)
+
+copy = ttk.Button(root, text="Copy", cursor="hand2",
+               command=copy)
+copy.place(x=180, y=300)
 
 
 root.mainloop()
