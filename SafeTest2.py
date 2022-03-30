@@ -55,6 +55,18 @@ def copy():
     root.clipboard_append(result["text"])
 
 
+def switch():
+    global is_on
+    if is_on:
+        onButton.config(image=off)
+        is_on = False
+        root.tk.call("set_theme", "light")
+        copy.config(image=copyLight)
+    else:
+        onButton.config(image=on)
+        is_on = True
+        root.tk.call("set_theme", "dark")
+        copy.config(image=copyDark)
 
 #
 
@@ -66,18 +78,6 @@ root.resizable(False, False)
 
 # Dark/Light mode toggle
 is_on = True
-
-def switch():
-    global is_on
-    if is_on:
-        onButton.config(image=off)
-        is_on = False
-        root.tk.call("set_theme", "light")
-    else:
-        onButton.config(image=on)
-        is_on = True
-        root.tk.call("set_theme", "dark")
-
 on = PhotoImage(file="dark.png")
 off = PhotoImage(file="light.png")
 
@@ -118,13 +118,14 @@ submit = ttk.Button(text="Speak", command=speak).place(x=325, y=450)
 result = Label(root, width=30, height=10, borderwidth=5, relief=RIDGE)
 result.place(x=260, y=100)
 
-
 clear = ttk.Button(root, text="Clear", cursor="hand2",
                command=clear)
 clear.place(x=280, y=300)
 
+copyDark = PhotoImage(file="copy-d.png")
+copyLight = PhotoImage(file="copy-l.png")
 
-copy = ttk.Button(root, text="Copy", cursor="hand2",
+copy = Button(root, image=copyDark, bd=0, cursor="hand2",
                command=copy)
 copy.place(x=180, y=300)
 
