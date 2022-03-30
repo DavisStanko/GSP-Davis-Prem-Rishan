@@ -3,7 +3,6 @@
 from tkinter import *
 import tkinter.ttk as ttk
 from gtts import gTTS
-import PIL
 from deep_translator import GoogleTranslator
 import playsound
 
