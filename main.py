@@ -3,6 +3,7 @@
 from tkinter import *
 import tkinter.ttk as ttk
 from gtts import gTTS
+import PIL
 from deep_translator import GoogleTranslator
 import playsound
 
@@ -94,7 +95,7 @@ entryValue = StringVar()
 option_variable = StringVar()
 option_variable.set("English")
 
-entry = ttk.Entry(root, textvariable=entryValue, width=20)
+entry = ttk.Entry(root, textvariable=entryValue, font=('Helvetica'), width=20)
 entry.place(x=50, y=100)
 # , width=20, bd=3, font=20, bg="#5B5750", fg="#FFF1BF"
 options = ttk.OptionMenu(root, option_variable, "English", "French", "Spanish", "Mandarin")
