@@ -1,18 +1,15 @@
-# Import the required module for text
-# to speech conversion
-from tkinter import *
-import tkinter.ttk as ttk
-from gtts import gTTS
-from deep_translator import GoogleTranslator
-import playsound
-import textwrap
+from tkinter import * #GUI
+import tkinter.ttk as ttk #Themes
+from gtts import gTTS #Google text to speech
+from deep_translator import GoogleTranslator # Google Translator
+import playsound # Play speech
 
 ttk.output = ""
 
 choose_langauge = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian',
                    'az': 'azerbaijani', 'eu': 'basque', 'be': 'belarusian', 'bn': 'bengali', 'bs': 'bosnian',
                    'bg': 'bulgarian', 'ca': 'catalan', 'ceb': 'cebuano', 'ny': 'chichewa',
-                   'zh-cn': 'chinese (simplified)', 'zh-tw': 'chinese (traditional)', 'co': 'corsican',
+                   'zh-CN': 'chinese (simplified)', 'zh-TW': 'chinese (traditional)', 'co': 'corsican',
                    'hr': 'croatian', 'cs': 'czech', 'da': 'danish', 'nl': 'dutch', 'en': 'english', 'eo': 'esperanto',
                    'et': 'estonian', 'tl': 'filipino', 'fi': 'finnish', 'fr': 'french', 'fy': 'frisian',
                    'gl': 'galician', 'ka': 'georgian', 'de': 'german', 'el': 'greek', 'gu': 'gujarati',
@@ -54,7 +51,7 @@ def speak():
     # Passing the text and language to the engine,
     # here we have marked slow=False. Which tells
     # the module that the converted audio should
-    myobj = gTTS(text=ttk.output, slow=False)
+    myobj = gTTS(text=ttk.output, slow=False, tld='com.au')
 
     # Saving the converted audio in a mp3 file named
     # welcome
@@ -149,4 +146,3 @@ copy.place(x=335, y=350)
 
 
 root.mainloop()
-
