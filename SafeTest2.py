@@ -3,6 +3,7 @@
 from tkinter import *
 import tkinter.ttk as ttk
 from gtts import gTTS
+import PIL
 from deep_translator import GoogleTranslator
 import playsound
 
@@ -112,7 +113,7 @@ options = ttk.OptionMenu(root, option_variable, "English", "French", "Spanish", 
 options.place(x=550, y=105)
 
 
-submit = ttk.Button(text="Speak", command=speak).place(x=325, y=450)
+speak = ttk.Button(text="Speak", command=speak).place(x=325, y=450)
 
 
 result = Label(root, width=30, height=10, borderwidth=5, relief=RIDGE)
