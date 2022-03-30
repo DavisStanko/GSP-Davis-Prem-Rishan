@@ -1,3 +1,0 @@
-# Software Project Scope
-
-## Organization
