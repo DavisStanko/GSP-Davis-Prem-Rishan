@@ -35,29 +35,16 @@ def get_key(val):  # Get key from value
 
 
 def lang_options():  # Language options
-    global output
-
     lang = get_key(option_variable.get())
-
     ttk.output = GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))
 
 
 def speak():  # Speak the text
     lang_options()
-
     result.config(text=ttk.output)
-
-    # Passing the text and language to the engine,
-    # here we have marked slow=False. Which tells
-    # the module that the converted audio should
-    myobj = gTTS(text=ttk.output, slow=False, tld='com.au')
-
-    # Saving the converted audio in a mp3 file named
-    # welcome
-    myobj.save("speech.mp3")
-
-    # Playing the converted file
-    playsound.playsound('speech.mp3', True)
+    myobj = gTTS(text=ttk.output, slow=False, tld='com.au') # Passing the text and language, speed, and accent to gtts
+    myobj.save("speech.mp3") # Saving the converted audio in an mp3 file
+    playsound.playsound('speech.mp3', True) # Playing the converted file
 
 
 def clear():  # Clear the text
@@ -66,7 +53,6 @@ def clear():  # Clear the text
 
 
 def copy():  # Copy the text
-    global output
     window.clipboard_clear()
     window.clipboard_append(result["text"])
 
