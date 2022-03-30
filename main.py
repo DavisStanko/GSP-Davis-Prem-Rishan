@@ -67,8 +67,8 @@ def clear(): # Clear the text
 
 def copy(): # Copy the text
     global output
-    root.clipboard_clear()
-    root.clipboard_append(result["text"])
+    window.clipboard_clear()
+    window.clipboard_append(result["text"])
 
 
 def switch(): # Switch the theme
@@ -76,36 +76,36 @@ def switch(): # Switch the theme
     if is_on:
         onButton.config(image=off)
         is_on = False
-        root.tk.call("set_theme", "light")
+        window.tk.call("set_theme", "light")
         copy.config(image=copyLight)
     else:
         onButton.config(image=on)
         is_on = True
-        root.tk.call("set_theme", "dark")
+        window.tk.call("set_theme", "dark")
         copy.config(image=copyDark)
 
 
 
-root = Tk()
+window = Tk()
 
-root.geometry("700x500")
-root.title("Translate")
-root.resizable(False, False)
+window.geometry("700x500")
+window.title("Translate")
+window.resizable(False, False)
 
 # Dark/Light mode toggle
 is_on = True
 on = PhotoImage(file="dark.png")
 off = PhotoImage(file="light.png")
 
-onButton = Button(root, image=on, bd=0, cursor="hand2", command=switch)
+onButton = Button(window, image=on, bd=0, cursor="hand2", command=switch)
 onButton.place(x=630, y=25)
 #
 
 
-root.tk.call("source", "azure.tcl")
-root.tk.call("set_theme", "dark")
+window.tk.call("source", "azure.tcl")
+window.tk.call("set_theme", "dark")
 
-labelTittle = ttk.Label(root, text="Translator", font=('Helvetica', 32, 'underline'))
+labelTittle = ttk.Label(window, text="Translator", font=('Helvetica', 32, 'underline'))
 labelTittle.place(x=260, y=25)
 
 # copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
@@ -117,29 +117,29 @@ option_variable = StringVar()
 option_variable.set("English")
 
 
-entry = Text(root, width=35, height=20, borderwidth=5, relief=RIDGE, wrap='word')
+entry = Text(window, width=35, height=20, borderwidth=5, relief=RIDGE, wrap='word')
 
 entry.place(x=70, y=150)
 
-options = ttk.OptionMenu(root, option_variable, *choose_langauge.values())
+options = ttk.OptionMenu(window, option_variable, *choose_langauge.values())
 options.place(x=460, y=105)
 
 speak = ttk.Button(text="Speak", command=speak).place(x=250, y=450)
 
-result = Label(root, width=35, height=20, anchor=NW, borderwidth=5, relief=RIDGE, wraplength=300, justify=LEFT)
+result = Label(window, width=35, height=20, anchor=NW, borderwidth=5, relief=RIDGE, wraplength=300, justify=LEFT)
 
 result.place(x=375, y=153)
 
-clear = ttk.Button(root, text="Clear", cursor="hand2",
+clear = ttk.Button(window, text="Clear", cursor="hand2",
                    command=clear)
 clear.place(x=350, y=450)
 
 copyDark = PhotoImage(file="copy-d.png")
 copyLight = PhotoImage(file="copy-l.png")
 
-copy = Button(root, image=copyDark, bd=0, cursor="hand2",
+copy = Button(window, image=copyDark, bd=0, cursor="hand2",
               command=copy)
 copy.place(x=335, y=350)
 
 
-root.mainloop()
+window.mainloop()
