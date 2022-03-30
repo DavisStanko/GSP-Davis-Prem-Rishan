@@ -4,6 +4,7 @@ from gtts import gTTS #Google text to speech
 from deep_translator import GoogleTranslator # Google Translator
 import playsound # Play speech
 
+# Google translate language codes and language names
 choose_langauge = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian',
                    'az': 'azerbaijani', 'eu': 'basque', 'be': 'belarusian', 'bn': 'bengali', 'bs': 'bosnian',
                    'bg': 'bulgarian', 'ca': 'catalan', 'ceb': 'cebuano', 'ny': 'chichewa',
@@ -27,13 +28,13 @@ choose_langauge = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': '
                    'fil': 'Filipino', 'he': 'Hebrew'}
 
 
-def get_key(val):
+def get_key(val): # Get key from value
     for key, value in choose_langauge.items():
         if val == value:
             return key
 
 
-def lang_options():
+def lang_options(): # Language options
     global output
 
     lang = get_key(option_variable.get())
@@ -41,7 +42,7 @@ def lang_options():
     ttk.output = GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))
 
 
-def speak():
+def speak(): # Speak the text
     lang_options()
 
     result.config(text=ttk.output)
@@ -59,18 +60,18 @@ def speak():
     playsound.playsound('speech.mp3', True)
 
 
-def clear():
+def clear(): # Clear the text
     entry.delete(1.0, 'end')
     result.config(text="")
 
 
-def copy():
+def copy(): # Copy the text
     global output
     root.clipboard_clear()
     root.clipboard_append(result["text"])
 
 
-def switch():
+def switch(): # Switch the theme
     global is_on
     if is_on:
         onButton.config(image=off)
@@ -83,8 +84,6 @@ def switch():
         root.tk.call("set_theme", "dark")
         copy.config(image=copyDark)
 
-
-#
 
 
 root = Tk()
