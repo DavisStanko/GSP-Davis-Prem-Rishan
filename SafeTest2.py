@@ -39,12 +39,11 @@ def get_key(val):
 
 
 def lang_options():
-    global ttk
+    global output
 
     lang = get_key(option_variable.get())
-    print(lang)
 
-    GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))
+    ttk.output = GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))
 
 
 def speak():
@@ -123,7 +122,6 @@ entryValue = StringVar()
 option_variable = StringVar()
 option_variable.set("English")
 
-entry = Text(root, width=30, height=10, borderwidth=5, relief=RIDGE)
 
 my_wrap = StringVar(value='none')
 
