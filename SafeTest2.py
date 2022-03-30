@@ -5,6 +5,7 @@ import tkinter.ttk as ttk
 from gtts import gTTS
 from deep_translator import GoogleTranslator
 import playsound
+import textwrap
 
 ttk.output = ""
 
@@ -83,7 +84,7 @@ root.tk.call("set_theme", "dark")
 
 
 labelTittle = ttk.Label(root, text="Translator", font=('Helvetica', 32, 'underline'))
-labelTittle.place(x=250, y=25)
+labelTittle.place(x=260, y=25)
 
 
 # copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
@@ -95,8 +96,9 @@ entryValue = StringVar()
 option_variable = StringVar()
 option_variable.set("English")
 
+my_wrap = StringVar(value='none')
 
-entry = Text(root, width=30, height=10, borderwidth=5, relief=RIDGE)
+entry = Text(root, width=30, height=10, borderwidth=5, relief=RIDGE, wrap='word')
 entry.place(x=10, y=100)
 
 
@@ -107,7 +109,7 @@ options.place(x=550, y=105)
 speak = ttk.Button(text="Speak", command=speak).place(x=325, y=450)
 
 
-result = Label(root, width=30, height=10, anchor=NW, borderwidth=5, relief=RIDGE)
+result = Label(root, width=30, height=10, anchor=NW, borderwidth=5, relief=RIDGE, wraplength=300, justify=LEFT)
 result.place(x=260, y=100)
 
 clear = ttk.Button(root, text="Clear", cursor="hand2",
