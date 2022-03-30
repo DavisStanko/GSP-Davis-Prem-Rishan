@@ -34,7 +34,7 @@ def get_key(val):  # Get key from value
             return key
 
 
-def speak():  # Speak the text
+def submit():  # Translate and display the text
     lang = get_key(option_variable.get())  # Get the output language
     ttk.output = GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))  # Translate the text
     result.config(text=ttk.output)
@@ -97,8 +97,8 @@ entry.place(x=70, y=150)
 options = ttk.OptionMenu(window, option_variable, *choose_langauge.values())
 options.place(x=460, y=105)
 
-speak = ttk.Button(text="Speak", command=speak)
-speak.place(x=250, y=450)
+submit = ttk.Button(text="Submit", command=submit)
+submit.place(x=250, y=450)
 
 result = Label(window, width=35, height=20, anchor=NW, borderwidth=5, relief=RIDGE, wraplength=300, justify=LEFT)
 result.place(x=375, y=153)
