@@ -89,7 +89,6 @@ labelTittle.place(x=260, y=25)
 
 
 # copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
-# stuff like googletrans and messagebox could be useful https://codingshiksha.com/python/python-tkinter-gui-script-to-make-language-translate-app-using-google-translate-api-full-project-for-beginners/
 # Flag stuff in options https://morioh.com/p/f900651c5e48
 
 
