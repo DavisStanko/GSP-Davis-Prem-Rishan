@@ -14,16 +14,16 @@ def lang_options():
     option = option_variable.get()
     if option == "English":
         # translator
-        ttk.output = GoogleTranslator(source='auto', target="en").translate(entry.get())
+        ttk.output = GoogleTranslator(source='auto', target="en").translate(entry.get("1.0", "end-1c"))
     elif option == "French":
         # translator
-        ttk.output = GoogleTranslator(source='auto', target="fr").translate(entry.get())
+        ttk.output = GoogleTranslator(source='auto', target="fr").translate(entry.get("1.0", "end-1c"))
     elif option == "Spanish":
         # translator
-        ttk.output = GoogleTranslator(source='auto', target="es").translate(entry.get())
+        ttk.output = GoogleTranslator(source='auto', target="es").translate(entry.get("1.0", "end-1c"))
     elif option == "Mandarin":
         # translator
-        ttk.output = GoogleTranslator(source='auto', target="zh-CN").translate(entry.get())
+        ttk.output = GoogleTranslator(source='auto', target="zh-CN").translate(entry.get("1.0", "end-1c"))
 
 
 def speak():
@@ -94,15 +94,21 @@ entryValue = StringVar()
 option_variable = StringVar()
 option_variable.set("English")
 
-entry = ttk.Entry(root, textvariable=entryValue, width=20)
-entry.place(x=50, y=100)
-# , width=20, bd=3, font=20, bg="#5B5750", fg="#FFF1BF"
+# entry = ttk.Entry(root, textvariable=entryValue, width=20)
+# entry.place(x=50, y=100)
+entry = Text(root, width=30, height=10, borderwidth=5, relief=RIDGE)
+entry.place(x=10, y=100)
+
+
 options = ttk.OptionMenu(root, option_variable, "English", "French", "Spanish", "Mandarin")
-options.place(x=450, y=105)
+options.place(x=550, y=105)
 
 submit = ttk.Button(text="Speak", command=speak).place(x=325, y=450)
 # , font=20, bg="#492C1D", fg="white",
-result = Label(text="", fg="white")
-result.place(x=50, y=250)
+# result = Label(text="", fg="white")
+# result.place(x=50, y=250)
+result = Label(root, width=30, height=10, borderwidth=5, relief=RIDGE)
+result.place(x=260, y=100)
+
 
 root.mainloop()
