@@ -1,8 +1,8 @@
-from tkinter import * #GUI
-import tkinter.ttk as ttk #Themes
-from gtts import gTTS #Google text to speech
-from deep_translator import GoogleTranslator # Google Translator
-import playsound # Play speech
+from tkinter import *  # GUI
+import tkinter.ttk as ttk  # Themes
+from gtts import gTTS  # Google text to speech
+from deep_translator import GoogleTranslator  # Google Translator
+import playsound  # Play speech
 
 # Google translate language codes and language names
 choose_langauge = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian',
@@ -28,13 +28,13 @@ choose_langauge = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': '
                    'fil': 'Filipino', 'he': 'Hebrew'}
 
 
-def get_key(val): # Get key from value
+def get_key(val):  # Get key from value
     for key, value in choose_langauge.items():
         if val == value:
             return key
 
 
-def lang_options(): # Language options
+def lang_options():  # Language options
     global output
 
     lang = get_key(option_variable.get())
@@ -42,7 +42,7 @@ def lang_options(): # Language options
     ttk.output = GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))
 
 
-def speak(): # Speak the text
+def speak():  # Speak the text
     lang_options()
 
     result.config(text=ttk.output)
@@ -60,18 +60,18 @@ def speak(): # Speak the text
     playsound.playsound('speech.mp3', True)
 
 
-def clear(): # Clear the text
+def clear():  # Clear the text
     entry.delete(1.0, 'end')
     result.config(text="")
 
 
-def copy(): # Copy the text
+def copy():  # Copy the text
     global output
     window.clipboard_clear()
     window.clipboard_append(result["text"])
 
 
-def switch(): # Switch the theme
+def switch():  # Switch the theme
     global dark_mode
     if dark_mode:
         onButton.config(image=off)
@@ -85,59 +85,50 @@ def switch(): # Switch the theme
         copy.config(image=copyDark)
 
 
-
-window = Tk() # Create the window
-window.geometry("700x500") # Set the size
-window.title("Translate") # Set the title
-window.resizable(False, False) # Disable resizing
+window = Tk()  # Create the window
+window.geometry("700x500")  # Set the size
+window.title("Translate")  # Set the title
+window.resizable(False, False)  # Disable resizing
 
 # Dark/Light mode toggle
 dark_mode = True
 on = PhotoImage(file="dark.png")
 off = PhotoImage(file="light.png")
-
 onButton = Button(window, image=on, bd=0, cursor="hand2", command=switch)
 onButton.place(x=630, y=25)
-#
 
-
+# Defualt theme
 window.tk.call("source", "azure.tcl")
 window.tk.call("set_theme", "dark")
 
+# Title
 labelTittle = ttk.Label(window, text="Translator", font=('Helvetica', 32, 'underline'))
 labelTittle.place(x=260, y=25)
-
-# copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
-# Flag stuff in options https://morioh.com/p/f900651c5e48
-
 
 entryValue = StringVar()
 option_variable = StringVar()
 option_variable.set("English")
 
-
 entry = Text(window, width=35, height=20, borderwidth=5, relief=RIDGE, wrap='word')
-
 entry.place(x=70, y=150)
 
 options = ttk.OptionMenu(window, option_variable, *choose_langauge.values())
 options.place(x=460, y=105)
 
-speak = ttk.Button(text="Speak", command=speak).place(x=250, y=450)
+speak = ttk.Button(text="Speak", command=speak)
+speak.place(x=250, y=450)
 
 result = Label(window, width=35, height=20, anchor=NW, borderwidth=5, relief=RIDGE, wraplength=300, justify=LEFT)
-
 result.place(x=375, y=153)
 
-clear = ttk.Button(window, text="Clear", cursor="hand2",
-                   command=clear)
+clear = ttk.Button(window, text="Clear", cursor="hand2", command=clear)
 clear.place(x=350, y=450)
 
+# copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
 copyDark = PhotoImage(file="copy-d.png")
 copyLight = PhotoImage(file="copy-l.png")
 
-copy = Button(window, image=copyDark, bd=0, cursor="hand2",
-              command=copy)
+copy = Button(window, image=copyDark, bd=0, cursor="hand2", command=copy)
 copy.place(x=335, y=350)
 
 
