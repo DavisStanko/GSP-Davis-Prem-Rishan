@@ -42,7 +42,6 @@ def lang_options():
 
     lang = get_key(option_variable.get())
     print(lang)
-    "selection = list(choose_langauge.keys())"
 
     GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))
 
