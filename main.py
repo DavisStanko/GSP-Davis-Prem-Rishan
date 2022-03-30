@@ -101,7 +101,7 @@ entry.place(x=50, y=100)
 options = ttk.OptionMenu(root, option_variable, "English", "French", "Spanish", "Mandarin")
 options.place(x=450, y=105)
 
-submit = ttk.Button(text="Speak", command=speak).place(x=325, y=450)
+speak = ttk.Button(text="Speak", command=speak).place(x=325, y=450)
 # , font=20, bg="#492C1D", fg="white",
 result = Label(text="", fg="white")
 result.place(x=50, y=250)
