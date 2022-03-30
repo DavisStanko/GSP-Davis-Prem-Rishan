@@ -100,7 +100,7 @@ entry = Text(root, width=30, height=10, borderwidth=5, relief=RIDGE)
 entry.place(x=10, y=100)
 
 
-options = ttk.OptionMenu(root, option_variable, *choose_langauge)
+options = ttk.OptionMenu(root, option_variable, *choose_langauge.values())
 options.place(x=550, y=105)
 
 
