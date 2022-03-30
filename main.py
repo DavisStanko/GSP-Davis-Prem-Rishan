@@ -53,6 +53,7 @@ root.resizable(False, False)
 # Dark/Light mode toggle
 is_on = True
 
+
 def switch():
     global is_on
 
