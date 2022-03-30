@@ -12,7 +12,7 @@ ttk.output = ""
 choose_langauge = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian',
                    'az': 'azerbaijani', 'eu': 'basque', 'be': 'belarusian', 'bn': 'bengali', 'bs': 'bosnian',
                    'bg': 'bulgarian', 'ca': 'catalan', 'ceb': 'cebuano', 'ny': 'chichewa',
-                   'zh-cn': 'chinese (simplified)', 'zh-tw': 'chinese (traditional)', 'co': 'corsican',
+                   'zh-CN': 'chinese (simplified)', 'zh-TW': 'chinese (traditional)', 'co': 'corsican',
                    'hr': 'croatian', 'cs': 'czech', 'da': 'danish', 'nl': 'dutch', 'en': 'english', 'eo': 'esperanto',
                    'et': 'estonian', 'tl': 'filipino', 'fi': 'finnish', 'fr': 'french', 'fy': 'frisian',
                    'gl': 'galician', 'ka': 'georgian', 'de': 'german', 'el': 'greek', 'gu': 'gujarati',
@@ -123,30 +123,29 @@ option_variable = StringVar()
 option_variable.set("English")
 
 
-my_wrap = StringVar(value='none')
+entry = Text(root, width=35, height=20, borderwidth=5, relief=RIDGE, wrap='word')
 
-entry = Text(root, width=30, height=10, borderwidth=5, relief=RIDGE, wrap='word')
-
-entry.place(x=10, y=100)
+entry.place(x=70, y=150)
 
 options = ttk.OptionMenu(root, option_variable, *choose_langauge.values())
-options.place(x=550, y=105)
+options.place(x=460, y=105)
 
-speak = ttk.Button(text="Speak", command=speak).place(x=325, y=450)
+speak = ttk.Button(text="Speak", command=speak).place(x=250, y=450)
 
-result = Label(root, width=30, height=10, anchor=NW, borderwidth=5, relief=RIDGE, wraplength=300, justify=LEFT)
+result = Label(root, width=35, height=20, anchor=NW, borderwidth=5, relief=RIDGE, wraplength=300, justify=LEFT)
 
-result.place(x=260, y=100)
+result.place(x=375, y=153)
 
 clear = ttk.Button(root, text="Clear", cursor="hand2",
                    command=clear)
-clear.place(x=280, y=300)
+clear.place(x=350, y=450)
 
 copyDark = PhotoImage(file="copy-d.png")
 copyLight = PhotoImage(file="copy-l.png")
 
 copy = Button(root, image=copyDark, bd=0, cursor="hand2",
               command=copy)
-copy.place(x=180, y=300)
+copy.place(x=335, y=350)
+
 
 root.mainloop()
