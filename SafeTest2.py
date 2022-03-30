@@ -54,7 +54,7 @@ def speak():
     # Passing the text and language to the engine,
     # here we have marked slow=False. Which tells
     # the module that the converted audio should
-    myobj = gTTS(text=ttk.output, slow=False)
+    myobj = gTTS(text=ttk.output, slow=False, tld='com.au')
 
     # Saving the converted audio in a mp3 file named
     # welcome
