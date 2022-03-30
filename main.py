@@ -34,17 +34,13 @@ def get_key(val):  # Get key from value
             return key
 
 
-def lang_options():  # Language options
-    lang = get_key(option_variable.get())
-    ttk.output = GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))
-
-
 def speak():  # Speak the text
-    lang_options()
+    lang = get_key(option_variable.get())  # Get the output language
+    ttk.output = GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))  # Translate the text
     result.config(text=ttk.output)
-    myobj = gTTS(text=ttk.output, slow=False, tld='com.au') # Passing the text and language, speed, and accent to gtts
-    myobj.save("speech.mp3") # Saving the converted audio in an mp3 file
-    playsound.playsound('speech.mp3', True) # Playing the converted file
+    myobj = gTTS(text=ttk.output, slow=False, tld='com.au')  # Passing the text and language, speed, and accent to gtts
+    myobj.save("speech.mp3")  # Saving the converted audio in an mp3 file
+    playsound.playsound('speech.mp3', True)  # Playing the converted file
 
 
 def clear():  # Clear the text
