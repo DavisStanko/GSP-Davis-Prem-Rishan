@@ -12,3 +12,4 @@ with harvard as source:
 print(r.recognize_google(audio))
 
 # print works on own computer, not sure how to test at school since we cannot use flac
+# ok lets go db
