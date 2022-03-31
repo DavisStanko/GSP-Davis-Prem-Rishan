@@ -4,8 +4,12 @@ import speech_recognition as sr
 # https://ports.macports.org/port/flac/
 
 r = sr.Recognizer()
+mic = sr.Microphone(device_index=0)
 
-harvard = sr.AudioFile("harvard.mp3")
+
+print(mic)
+
+harvard = sr.AudioFile("harvard.wav")
 with harvard as source:
     audio = r.record(source)
 
