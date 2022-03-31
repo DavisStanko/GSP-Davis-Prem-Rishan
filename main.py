@@ -16,8 +16,7 @@ def get_key(val):  # Get key from value
 
 def submit():  # Translate and display the text
     lang = get_key(option_variable.get())  # Get the output language
-    ttk.output = GoogleTranslator(source="auto", target=lang).translate(
-        entry.get(1.0, "end"))  # Translate the text
+    ttk.output = GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))  # Translate the text
     result.config(text=ttk.output)
     # Passing the text and language, speed, and accent to gtts
     myobj = gTTS(text=ttk.output, slow=False, lang=lang)
