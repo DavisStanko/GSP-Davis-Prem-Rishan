@@ -16,6 +16,8 @@ Please be sure to install the following before running the program.
 - playsound
 - sqlite3
 - datetime
+- PyAudio
+- portaudio in your OS
 
 ## Usage
 
