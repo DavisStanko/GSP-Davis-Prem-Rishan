@@ -1,6 +1,6 @@
 # Style Guide
 
-Camel Case
+Naming with Python/Snake case
 
 Functional Programming
 

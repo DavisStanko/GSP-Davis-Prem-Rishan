@@ -5,32 +5,15 @@ from deep_translator import GoogleTranslator  # Google Translator
 import playsound  # Play speech
 import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
-# from speech_recog import Recognizer
+"""from module_switch import ImportBlocker
+import sys
+sys.meta_path = [ImportBlocker('speech_recog')]
+from speech_recog import Recognizer"""
 
 # Google translate language codes and language names
-choose_langauge = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian',
-                   'az': 'azerbaijani', 'eu': 'basque', 'be': 'belarusian', 'bn': 'bengali', 'bs': 'bosnian',
-                   'bg': 'bulgarian', 'ca': 'catalan', 'ceb': 'cebuano', 'ny': 'chichewa',
-                   'zh-CN': 'chinese (simplified)', 'zh-TW': 'chinese (traditional)', 'co': 'corsican',
-                   'hr': 'croatian', 'cs': 'czech', 'da': 'danish', 'nl': 'dutch', 'en': 'english', 'eo': 'esperanto',
-                   'et': 'estonian', 'tl': 'filipino', 'fi': 'finnish', 'fr': 'french', 'fy': 'frisian',
-                   'gl': 'galician', 'ka': 'georgian', 'de': 'german', 'el': 'greek', 'gu': 'gujarati',
-                   'ht': 'haitian creole', 'ha': 'hausa', 'haw': 'hawaiian', 'iw': 'hebrew', 'hi': 'hindi',
-                   'hmn': 'hmong', 'hu': 'hungarian', 'is': 'icelandic', 'ig': 'igbo', 'id': 'indonesian',
-                   'ga': 'irish', 'it': 'italian', 'ja': 'japanese', 'jw': 'javanese', 'kn': 'kannada', 'kk': 'kazakh',
-                   'km': 'khmer', 'ko': 'korean', 'ku': 'kurdish (kurmanji)', 'ky': 'kyrgyz', 'lo': 'lao',
-                   'la': 'latin', 'lv': 'latvian', 'lt': 'lithuanian', 'lb': 'luxembourgish', 'mk': 'macedonian',
-                   'mg': 'malagasy', 'ms': 'malay', 'ml': 'malayalam', 'mt': 'maltese', 'mi': 'maori', 'mr': 'marathi',
-                   'mn': 'mongolian', 'my': 'myanmar (burmese)', 'ne': 'nepali', 'no': 'norwegian', 'ps': 'pashto',
-                   'fa': 'persian', 'pl': 'polish', 'pt': 'portuguese', 'pa': 'punjabi', 'ro': 'romanian',
-                   'ru': 'russian', 'sm': 'samoan', 'gd': 'scots gaelic', 'sr': 'serbian', 'st': 'sesotho',
-                   'sn': 'shona', 'sd': 'sindhi', 'si': 'sinhala', 'sk': 'slovak', 'sl': 'slovenian', 'so': 'somali',
-                   'es': 'spanish', 'su': 'sundanese', 'sw': 'swahili', 'sv': 'swedish', 'tg': 'tajik', 'ta': 'tamil',
-                   'te': 'telugu', 'th': 'thai', 'tr': 'turkish', 'uk': 'ukrainian', 'ur': 'urdu', 'uz': 'uzbek',
-                   'vi': 'vietnamese', 'cy': 'welsh', 'xh': 'xhosa', 'yi': 'yiddish', 'yo': 'yoruba', 'zu': 'zulu',
-                   'fil': 'Filipino', 'he': 'Hebrew'}
+choose_langauge = {"af": "afrikaans", "sq": "albanian", "am": "amharic", "ar": "arabic", "hy": "armenian", "az": "azerbaijani", "eu": "basque", "be": "belarusian", "bn": "bengali", "bs": "bosnian", "bg": "bulgarian", "ca": "catalan", "ceb": "cebuano", "ny": "chichewa", "zh-CN": "chinese (simplified)", "zh-TW": "chinese (traditional)", "co": "corsican", "hr": "croatian", "cs": "czech", "da": "danish", "nl": "dutch", "en": "english", "eo": "esperanto", "et": "estonian", "tl": "filipino", "fi": "finnish", "fr": "french", "fy": "frisian", "gl": "galician", "ka": "georgian", "de": "german", "el": "greek", "gu": "gujarati", "ht": "haitian creole", "ha": "hausa", "haw": "hawaiian", "iw": "hebrew", "hi": "hindi", "hmn": "hmong", "hu": "hungarian", "is": "icelandic", "ig": "igbo", "id": "indonesian", "ga": "irish", "it": "italian", "ja": "japanese", "jw": "javanese", "kn": "kannada", "kk": "kazakh", "km": "khmer", "ko": "korean", "ku": "kurdish (kurmanji)", "ky": "kyrgyz", "lo": "lao", "la": "latin", "lv": "latvian", "lt": "lithuanian", "lb": "luxembourgish", "mk": "macedonian", "mg": "malagasy", "ms": "malay", "ml": "malayalam", "mt": "maltese", "mi": "maori", "mr": "marathi", "mn": "mongolian", "my": "myanmar (burmese)", "ne": "nepali", "no": "norwegian", "ps": "pashto", "fa": "persian", "pl": "polish", "pt": "portuguese", "pa": "punjabi", "ro": "romanian", "ru": "russian", "sm": "samoan", "gd": "scots gaelic", "sr": "serbian", "st": "sesotho", "sn": "shona", "sd": "sindhi", "si": "sinhala", "sk": "slovak", "sl": "slovenian", "so": "somali", "es": "spanish", "su": "sundanese", "sw": "swahili", "sv": "swedish", "tg": "tajik", "ta": "tamil", "te": "telugu", "th": "thai", "tr": "turkish", "uk": "ukrainian", "ur": "urdu", "uz": "uzbek", "vi": "vietnamese", "cy": "welsh", "xh": "xhosa", "yi": "yiddish", "yo": "yoruba", "zu": "zulu", "fil": "Filipino", "he": "Hebrew"}
 
-# rg = Recognizer()
+"rg = Recognizer()"
 
 
 ##################################
@@ -55,7 +38,7 @@ def create_table():
         keep_table = True
         if len(result) == 1:
             response = input("The table {0} already exists, do you wish to recreate it? (y/n): ".format(table_name))
-            if response == 'y':
+            if response == "y":
                 keep_table = False
                 print("The {0} table will be recreated - all existing data will be lost.".format(table_name))
                 cursor.execute("drop table if exists {0}".format(table_name))
@@ -82,7 +65,7 @@ def insert_data(values):
 
 
 def get_info():
-    inputGet = entry.get('1.0', 'end-1c')
+    inputGet = entry.get("1.0", "end-1c")
     translatedResult = result["text"]
     lang = get_key(option_variable.get())
     current_date_time = (datetime.datetime.now())
@@ -103,14 +86,20 @@ def submit():  # Translate and display the text
     lang = get_key(option_variable.get())  # Get the output language
     ttk.output = GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))  # Translate the text
     result.config(text=ttk.output)
-    # Passing the text and language, speed, and accent to gtts
-    myobj = gTTS(text=ttk.output, slow=False, lang=lang)
-    myobj.save("speech.mp3")  # Saving the converted audio in an mp3 file
-    playsound.playsound('speech.mp3', True)  # Playing the converted file
+    try:
+        # Passing the text and language, speed, and accent to gtts
+        myobj = gTTS(text=ttk.output, slow=False, lang=lang)
+        myobj.save("speech.mp3")  # Saving the converted audio in an mp3 file
+        playsound.playsound("speech.mp3", True)  # Playing the converted file
+    except ValueError:
+        # Passing the text and language, speed, and accent to gtts
+        myobj = gTTS(text=ttk.output, slow=False, lang="en")
+        myobj.save("speech.mp3")  # Saving the converted audio in an mp3 file
+        playsound.playsound("speech.mp3", True)  # Playing the converted file
 
 
 def clear():  # Clear both text boxes
-    entry.delete(1.0, 'end')
+    entry.delete(1.0, "end")
     result.config(text="")
 
 
@@ -125,16 +114,16 @@ def switch():  # Switch the theme
         onButton.config(image=off)
         dark_mode = False
         window.tk.call("set_theme", "light")
-        copy.config(image=copy_light)
-        mic_button.config(image=mic_light)
-        history_button.config(image=history_light)
+        copy.config(image=copyLight)
+        mic_button.config(image=micLight)
+        history.config(image=historyLight)
     else:
         onButton.config(image=on)
         dark_mode = True
         window.tk.call("set_theme", "dark")
-        copy.config(image=copy_dark)
-        mic_button.config(image=mic_dark)
-        history_button.config(image=history_dark)
+        copy.config(image=copyDark)
+        mic_button.config(image=micDark)
+        history.config(image=historyDark)
 
 
 def submit_Button():
@@ -147,25 +136,10 @@ def listen():
     rg.paste(entryValue)
 
 
-def history_list():
-    history = Tk()
-    history.geometry("500x500")
-    history.resizable(False, False)
-    history.title("Translation History")
-    history.tk.call("source", "azure.tcl")
-    history.tk.call("set_theme", "dark")
-
-    def destroy_history():
-        history.destroy()
-
-
-    close_button = ttk.Button(history, text="Close", cursor="hand2", style='Accent.TButton', command=destroy_history)
-    close_button.place(x=350, y=450)
-
 window = Tk()  # Create the window
 window.geometry("700x500")  # Set the size
 window.title("Translate")  # Set the title
-window.resizable(False, False)  # Disable resizing
+window.resizable(True, True)  # Disable resizing
 
 # Dark/Light mode toggle
 dark_mode = True
@@ -180,7 +154,7 @@ window.tk.call("set_theme", "dark")
 
 # Title
 labelTittle = ttk.Label(window, text="Translator",
-                        font=('Helvetica', 32, 'underline'))
+                        font=("Helvetica", 32, "underline"))
 labelTittle.place(x=260, y=25)
 
 entryValue = StringVar()
@@ -188,7 +162,7 @@ option_variable = StringVar()
 option_variable.set("English")
 
 entry = Text(window, width=35, height=20,
-             borderwidth=5, relief=RIDGE, wrap='word')
+             borderwidth=5, relief=RIDGE, wrap="word")
 entry.place(x=70, y=150)
 
 options = ttk.OptionMenu(window, option_variable, *choose_langauge.values())
@@ -200,36 +174,34 @@ option_variable2.set("Auto Detect")
 optionsAuto = ttk.OptionMenu(window, option_variable2, "Auto Detect", "Auto Detect")
 optionsAuto.place(x=160, y=105)
 
-submit1 = ttk.Button(text="Submit", style='Accent.TButton', command=submit_Button)
+submit1 = ttk.Button(text="Submit", style="Accent.TButton", command=submit_Button)
 submit1.place(x=250, y=450)
 
 result = Label(window, width=35, height=20, anchor=NW,
                borderwidth=5, relief=RIDGE, wraplength=300, justify=LEFT)
 result.place(x=375, y=153)
 
-clear = ttk.Button(window, text="Clear", cursor="hand2", style='Accent.TButton', command=clear)
+clear = ttk.Button(window, text="Clear", cursor="hand2", style="Accent.TButton", command=clear)
 clear.place(x=350, y=450)
 
 # copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
-copy_dark = PhotoImage(file="copy-d.png")
-copy_light = PhotoImage(file="copy-l.png")
+copyDark = PhotoImage(file="copy-d.png")
+copyLight = PhotoImage(file="copy-l.png")
 
-copy = Button(window, image=copy_dark, bd=0, cursor="hand2", command=copy)
+copy = Button(window, image=copyDark, bd=0, cursor="hand2", command=copy)
 copy.place(x=335, y=350)
 
-history_dark = PhotoImage(file="history-d.png")
-history_light = PhotoImage(file="history-l.png")
+historyDark = PhotoImage(file="history-d.png")
+historyLight = PhotoImage(file="history-l.png")
 
-history_button = Button(window, image=history_dark, bd=0, cursor="hand2", command=history_list)
-history_button.place(x=335, y=250)
+history = Button(window, image=historyDark, bd=0, cursor="hand2", command=copy)
+history.place(x=335, y=250)
 
-mic_dark = PhotoImage(file="mic-d.png")
-mic_light = PhotoImage(file="mic-l.png")
+micDark = PhotoImage(file="mic-d.png")
+micLight = PhotoImage(file="mic-l.png")
 
-mic_button = Button(window, image=mic_dark, bd=0, cursor="hand2")
+mic_button = Button(window, image=micDark, bd=0, cursor="hand2", command=listen)
 mic_button.place(x=335, y=300)
-
-# , command=listen)
 
 # Things to do
 # Fix up create table code, get history to open new window to display past translation history, make it show
@@ -238,7 +210,7 @@ mic_button.place(x=335, y=300)
 # mic func to rishans STT code
 # In general make UI look tad nicer
 
-tempCreate = Button(window, text='Create', command=create_table)
-tempCreate.place(x=355, y=250)
+# tempCreate = Button(window, text="Create", command=create_table)
+# tempCreate.place(x=355, y=250)
 
 window.mainloop()
