@@ -14,6 +14,8 @@ Please be sure to install the following before running the program.
 - gTTS
 - deep_translator
 - playsound
+- sqlite3
+- datetime
 
 ## Usage
 
