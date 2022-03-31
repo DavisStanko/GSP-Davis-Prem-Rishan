@@ -5,7 +5,7 @@ from deep_translator import GoogleTranslator  # Google Translator
 import playsound  # Play speech
 import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
-from speech_recog import Recognizer
+# from speech_recog import Recognizer
 
 # Google translate language codes and language names
 choose_langauge = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian',
@@ -30,7 +30,7 @@ choose_langauge = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': '
                    'vi': 'vietnamese', 'cy': 'welsh', 'xh': 'xhosa', 'yi': 'yiddish', 'yo': 'yoruba', 'zu': 'zulu',
                    'fil': 'Filipino', 'he': 'Hebrew'}
 
-rg = Recognizer()
+# rg = Recognizer()
 
 
 ##################################
@@ -40,7 +40,7 @@ def create_product_table_UI():
 
 
 def create_table():
-    db_name = "translationHistory.db"
+    db_name = "translation_history.db"
     sql = """create table History
             (Input text,
             Translation text,
@@ -74,7 +74,7 @@ def create_table():
 
 def insert_data(values):
     # global
-    with sqlite3.connect("translationHistory.db") as db:
+    with sqlite3.connect("translation_history.db") as db:
         cursor = db.cursor()
         sql = "insert into History (Input, Translation, Language, Date) values (?,?,?,?)"
         cursor.execute(sql, values)
@@ -125,16 +125,16 @@ def switch():  # Switch the theme
         onButton.config(image=off)
         dark_mode = False
         window.tk.call("set_theme", "light")
-        copy.config(image=copyLight)
-        mic_button.config(image=micLight)
-        history.config(image=historyLight)
+        copy.config(image=copy_light)
+        mic_button.config(image=mic_light)
+        history_button.config(image=history_light)
     else:
         onButton.config(image=on)
         dark_mode = True
         window.tk.call("set_theme", "dark")
-        copy.config(image=copyDark)
-        mic_button.config(image=micDark)
-        history.config(image=historyDark)
+        copy.config(image=copy_dark)
+        mic_button.config(image=mic_dark)
+        history_button.config(image=history_dark)
 
 
 def submit_Button():
@@ -147,10 +147,25 @@ def listen():
     rg.paste(entryValue)
 
 
+def history_list():
+    history = Tk()
+    history.geometry("500x500")
+    history.resizable(False, False)
+    history.title("Translation History")
+    history.tk.call("source", "azure.tcl")
+    history.tk.call("set_theme", "dark")
+
+    def destroy_history():
+        history.destroy()
+
+
+    close_button = ttk.Button(history, text="Close", cursor="hand2", style='Accent.TButton', command=destroy_history)
+    close_button.place(x=350, y=450)
+
 window = Tk()  # Create the window
 window.geometry("700x500")  # Set the size
 window.title("Translate")  # Set the title
-window.resizable(True, True)  # Disable resizing
+window.resizable(False, False)  # Disable resizing
 
 # Dark/Light mode toggle
 dark_mode = True
@@ -196,23 +211,25 @@ clear = ttk.Button(window, text="Clear", cursor="hand2", style='Accent.TButton',
 clear.place(x=350, y=450)
 
 # copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
-copyDark = PhotoImage(file="copy-d.png")
-copyLight = PhotoImage(file="copy-l.png")
+copy_dark = PhotoImage(file="copy-d.png")
+copy_light = PhotoImage(file="copy-l.png")
 
-copy = Button(window, image=copyDark, bd=0, cursor="hand2", command=copy)
+copy = Button(window, image=copy_dark, bd=0, cursor="hand2", command=copy)
 copy.place(x=335, y=350)
 
-historyDark = PhotoImage(file="history-d.png")
-historyLight = PhotoImage(file="history-l.png")
+history_dark = PhotoImage(file="history-d.png")
+history_light = PhotoImage(file="history-l.png")
 
-history = Button(window, image=historyDark, bd=0, cursor="hand2", command=copy)
-history.place(x=335, y=250)
+history_button = Button(window, image=history_dark, bd=0, cursor="hand2", command=history_list)
+history_button.place(x=335, y=250)
 
-micDark = PhotoImage(file="mic-d.png")
-micLight = PhotoImage(file="mic-l.png")
+mic_dark = PhotoImage(file="mic-d.png")
+mic_light = PhotoImage(file="mic-l.png")
 
-mic_button = Button(window, image=micDark, bd=0, cursor="hand2", command=listen)
+mic_button = Button(window, image=mic_dark, bd=0, cursor="hand2")
 mic_button.place(x=335, y=300)
+
+# , command=listen)
 
 # Things to do
 # Fix up create table code, get history to open new window to display past translation history, make it show
@@ -221,7 +238,7 @@ mic_button.place(x=335, y=300)
 # mic func to rishans STT code
 # In general make UI look tad nicer
 
-# tempCreate = Button(window, text='Create', command=create_table)
-# tempCreate.place(x=355, y=250)
+tempCreate = Button(window, text='Create', command=create_table)
+tempCreate.place(x=355, y=250)
 
 window.mainloop()
