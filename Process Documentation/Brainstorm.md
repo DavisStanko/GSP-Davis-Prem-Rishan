@@ -1,18 +1,21 @@
 # Brainstorm
 
-Chatbot?
+## Ideas
 
-Converters?
+### Chatbot?
 
-Translator?
-  Text to Speech
-  Speech to text input!??!
+### Converters?
 
-[Python TTS?](https://www.thepythoncode.com/article/convert-text-to-speech-in-python)
+### Translator?
 
-Gui?
+- Text to Speech
+  - [Python TTS?](https://www.thepythoncode.com/article/convert-text-to-speech-in-python)
+- Speech to text input!??!
 
-- Tkinter (ugly)
-  - Tkinter themes??
+## Gui
 
-- PyQT (Hard to use)
+### Tkinter (ugly)
+
+- Tkinter themes??
+
+### PyQT (Hard to use)
