@@ -1,6 +1,6 @@
 # Style Guide
 
-Naming with Python case
+Naming with Python/Snake case
 
 Functional Programming
 
