@@ -2,8 +2,11 @@ class ImportBlocker(object):
     def __init__(self, *args):
         self.module_names = args
 
-    def find_module(self, fullname):
-        try:
-            import module_name
-        except:
-            pass  # or anything to log
+    def find_module(self, fullname, path=None):
+        if fullname in self.module_names:
+            return self
+        return None
+
+    def exec_module(self, mdl):
+        # return an empty namespace
+        return {}
