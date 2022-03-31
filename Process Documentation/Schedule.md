@@ -37,3 +37,7 @@ Move history_hui to main
 
 - Format history
 - Add functions
+
+selecting translated text
+
+wrapping text to fit

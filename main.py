@@ -143,7 +143,7 @@ def close_history():
     history_win.destroy()
 
 
-def clear_history():
+# def clear_history():
 
 
 def history_window():
