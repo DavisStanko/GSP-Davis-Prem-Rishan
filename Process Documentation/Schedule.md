@@ -4,7 +4,7 @@ Prem is away Feb 17-21 inclusive.
 
 Davis' code works but a GUI is needed
 
-- Gui implemented
+- GUI implemented
 - GUI fixed
 
 Move from replit to Git
@@ -17,18 +17,18 @@ Make GUI pretty
 - ttk theme implemented
 - theme switcher implemented
 
-Change input and output gui to paragraph form to allow large inputs as well as copy and pasting
+Change input and output GUI to paragraph form to allow large inputs as well as copy and pasting
 
 - Done but needs to be merged
 
-Fix accent
+Make sure speech_recog works on computer with portaudio + pyaudio
 
-- Accent fixed via lang arg
+- Fixed + made modular (OOP)
+
+Fix accent
 
 Follow style guide
 
-- Formatted
-
 Update testing docs
 
-- Done
+Create import module switch
