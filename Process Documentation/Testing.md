@@ -2,7 +2,7 @@
 
 ## Checks
 
-- Gui displays
+- GUI displays
 - Input received
   - Typing input
   - Speech input
@@ -13,5 +13,8 @@
     - Text wraps
 - Audio played
   - Right accent if applicable
-- History written to sql db
-  - Treeview gui displays
+- History written to SQL DB
+  - Treeview GUI displays
+- Speech recognition recognizes .wav/.mp3 recordings
+  - Mic input is readable
+  - Paste method successfully pastes recognizable audio to entry box
