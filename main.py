@@ -193,7 +193,7 @@ options.place(x=460, y=105)
 option_variable2 = StringVar()
 option_variable2.set("Auto Detect")
 
-optionsAuto = ttk.OptionMenu(window, option_variable2, "Auto Detect", "Auto Detect")
+optionsAuto = ttk.Button(text="Auto Detect", state="disabled")
 optionsAuto.place(x=160, y=105)
 
 submit1 = ttk.Button(text="Submit", style="Accent.TButton", command=submit_Button)
