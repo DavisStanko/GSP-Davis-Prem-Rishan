@@ -6,11 +6,11 @@ import playsound  # Play speech
 import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
 
-from module_switch import ImportBlocker
+"""from module_switch import ImportBlocker
 import sys
 sys.meta_path = [ImportBlocker('speech_recog')]
 
-from speech_recog import Recognizer
+from speech_recog import Recognizer"""
 
 # Google translate language codes and language names
 choose_langauge = {"af": "afrikaans", "sq": "albanian", "am": "amharic", "ar": "arabic", "hy": "armenian", "az": "azerbaijani", "eu": "basque", "be": "belarusian", "bn": "bengali", "bs": "bosnian", "bg": "bulgarian", "ca": "catalan", "ceb": "cebuano", "ny": "chichewa", "zh-CN": "chinese (simplified)", "zh-TW": "chinese (traditional)", "co": "corsican", "hr": "croatian", "cs": "czech", "da": "danish", "nl": "dutch", "en": "english", "eo": "esperanto", "et": "estonian", "tl": "filipino", "fi": "finnish", "fr": "french", "fy": "frisian", "gl": "galician", "ka": "georgian", "de": "german", "el": "greek", "gu": "gujarati", "ht": "haitian creole", "ha": "hausa", "haw": "hawaiian", "iw": "hebrew", "hi": "hindi", "hmn": "hmong", "hu": "hungarian", "is": "icelandic", "ig": "igbo", "id": "indonesian", "ga": "irish", "it": "italian", "ja": "japanese", "jw": "javanese", "kn": "kannada", "kk": "kazakh", "km": "khmer", "ko": "korean", "ku": "kurdish (kurmanji)", "ky": "kyrgyz", "lo": "lao", "la": "latin", "lv": "latvian", "lt": "lithuanian", "lb": "luxembourgish", "mk": "macedonian", "mg": "malagasy", "ms": "malay", "ml": "malayalam", "mt": "maltese", "mi": "maori", "mr": "marathi", "mn": "mongolian", "my": "myanmar (burmese)", "ne": "nepali", "no": "norwegian", "ps": "pashto", "fa": "persian", "pl": "polish", "pt": "portuguese", "pa": "punjabi", "ro": "romanian", "ru": "russian", "sm": "samoan", "gd": "scots gaelic", "sr": "serbian", "st": "sesotho", "sn": "shona", "sd": "sindhi", "si": "sinhala", "sk": "slovak", "sl": "slovenian", "so": "somali", "es": "spanish", "su": "sundanese", "sw": "swahili", "sv": "swedish", "tg": "tajik", "ta": "tamil", "te": "telugu", "th": "thai", "tr": "turkish", "uk": "ukrainian", "ur": "urdu", "uz": "uzbek", "vi": "vietnamese", "cy": "welsh", "xh": "xhosa", "yi": "yiddish", "yo": "yoruba", "zu": "zulu", "fil": "Filipino", "he": "Hebrew"}
@@ -135,11 +135,13 @@ def submit_Button():
     get_info()
 
 
-def listen():
-    rg.listening()
-    rg.paste(entryValue)
+def close_history():
+    history_win.destroy()
+
 
 def history_window():
+    global history_win
+
     history_win = Tk()  # Create the window
     history_win.geometry("500x500")  # Set the size
     history_win.title("Translation History")  # Set the title
@@ -147,12 +149,13 @@ def history_window():
     history_win.tk.call("source", "azure.tcl")
     history_win.tk.call("set_theme", "dark")
 
-    def close_history():
-        history_win.destroy()
-
     close_button = ttk.Button(history_win, text="Close", cursor="hand2", style="Accent.TButton", command=close_history)
     close_button.place(x=250, y=450)
 
+
+def listen():
+    rg.listening()
+    rg.paste(entryValue)
 
 
 window = Tk()  # Create the window
