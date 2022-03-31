@@ -1,15 +1,30 @@
 # Roles and Responsibilities
 
-Rishan
+## Rishan
 
-- Backend
+- Speech to text
+- Gui skeleton
+- SQL Treeview
 
-Prem
+## Prem
 
 - Frontend
+  - Tkinter Themes
+    - Dark/Light mode
+  - Button design
+  - Copy/Clear/History functions
+- SQL backend
 
-Davis
+## Davis
 
 - Git
+  - Create and manage repo.
+  - Aid group mebers with usage.
+  - Manually merge failed pulls.
+- Backend
+  - Translations
+    - Implementing modules
+      - Language/Accent compatibility
 - Documentation
-- Some backend
+  - Markdown
+  - Writing
