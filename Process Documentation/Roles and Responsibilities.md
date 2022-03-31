@@ -1,15 +1,38 @@
 # Roles and Responsibilities
 
-Rishan
+Every contributor has had input and has contributed to every aspect of the program. This document merely highlights each contributors focuses.
 
-- Backend
-
-Prem
-
-- Frontend
-
-Davis
+## Davis
 
 - Git
+  - Create and manage repo.
+  - Aid group members with usage.
+  - Manually merge failed pulls.
+- Backend
+  - Translations
+    - Implementing modules
+      - Language/Accent compatibility
+- Frontend
+  - Limited work on cross platform compatibility
 - Documentation
-- Some backend
+  - Markdown
+  - Writing
+  - License
+
+## Rishan
+
+- Backend
+  - Speech to text
+- Frontend
+  - Gui skeleton
+  - SQL Treeview
+
+## Prem
+
+- Backend
+  - SQL backend
+- Frontend
+  - Tkinter Themes
+    - Dark/Light mode
+  - Button design
+  - Copy/Clear/History functions
