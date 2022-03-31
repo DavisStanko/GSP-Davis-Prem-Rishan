@@ -32,3 +32,8 @@ Follow style guide
 Update testing docs
 
 Create import module switch
+
+Move history_hui to main
+
+- Format history
+- Add functions

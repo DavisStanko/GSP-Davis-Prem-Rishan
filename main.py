@@ -5,6 +5,7 @@ from deep_translator import GoogleTranslator  # Google Translator
 import playsound  # Play speech
 import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
+import history_gui
 
 """from module_switch import ImportBlocker
 import sys
