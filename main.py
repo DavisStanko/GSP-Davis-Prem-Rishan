@@ -23,7 +23,7 @@ def create_product_table_UI():
 
 
 def create_table():
-    db_name = "translationHistory.db"
+    db_name = "translation_history.db"
     sql = """create table History
             (Input text,
             Translation text,
@@ -57,7 +57,7 @@ def create_table():
 
 def insert_data(values):
     # global
-    with sqlite3.connect("translationHistory.db") as db:
+    with sqlite3.connect("translation_history.db") as db:
         cursor = db.cursor()
         sql = "insert into History (Input, Translation, Language, Date) values (?,?,?,?)"
         cursor.execute(sql, values)
