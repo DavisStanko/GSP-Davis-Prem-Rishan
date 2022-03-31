@@ -23,6 +23,12 @@ Change input and output gui to paragraph form to allow large inputs as well as c
 
 Fix accent
 
+- Accent fixed via lang arg
+
 Follow style guide
 
+- Formatted
+
 Update testing docs
+
+- Done
