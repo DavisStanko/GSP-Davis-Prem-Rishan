@@ -16,7 +16,7 @@ def query_database():
     with sqlite3.connect("translation_history.db") as db:
         cursor = db.cursor()
 
-        cursor.execute("SELECT * FROM History")
+        cursor.execute("SELECT rowid, * FROM History")
         records = cursor.fetchall()
 
         # Add data to the screen
