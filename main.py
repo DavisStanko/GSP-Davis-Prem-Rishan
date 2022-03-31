@@ -17,6 +17,7 @@ choose_langauge = {"af": "afrikaans", "sq": "albanian", "am": "amharic", "ar": "
 
 "rg = Recognizer()"
 
+d_l_buttons = 0
 
 ##################################
 
@@ -98,7 +99,8 @@ def submit():  # Translate and display the text
         myobj = gTTS(text=ttk.output, slow=False, lang="en")
         myobj.save("speech.mp3")  # Saving the converted audio in an mp3 file
         playsound.playsound("speech.mp3", True)  # Playing the converted file
-
+    except AssertionError:
+        pass
 
 def clear():  # Clear both text boxes
     entry.delete(1.0, "end")
@@ -111,23 +113,24 @@ def copy():  # Copy the text
 
 
 def switch():  # Switch the theme
-    global dark_mode
+    global dark_mode, d_l_buttons
     if dark_mode:
         onButton.config(image=off)
         dark_mode = False
         window.tk.call("set_theme", "light")
-        history_win.tk.call("set_theme", "light")
         copy.config(image=copy_light)
         mic_button.config(image=mic_light)
         history.config(image=history_light)
+        d_l_buttons = 1
+
     else:
         onButton.config(image=on)
         dark_mode = True
         window.tk.call("set_theme", "dark")
-        history_win.tk.call("set_theme", "dark")
         copy.config(image=copy_dark)
         mic_button.config(image=mic_dark)
         history.config(image=history_dark)
+        d_l_buttons = 0
 
 
 def submit_Button():
@@ -139,18 +142,26 @@ def close_history():
     history_win.destroy()
 
 
+# def clear_history
+
 def history_window():
     global history_win
 
     history_win = Tk()  # Create the window
     history_win.geometry("500x500")  # Set the size
     history_win.title("Translation History")  # Set the title
-    history_win.resizable(True, True)  # Disable resizing
+    history_win.resizable(False, False)  # Disable resizing
     history_win.tk.call("source", "azure.tcl")
     history_win.tk.call("set_theme", "dark")
-
+    if d_l_buttons == 1:
+        history_win.tk.call("set_theme", "light")
+    else:
+        history_win.tk.call("set_theme", "dark")
     close_button = ttk.Button(history_win, text="Close", cursor="hand2", style="Accent.TButton", command=close_history)
     close_button.place(x=250, y=450)
+    clear_history = ttk.Button(history_win, text="Clear History", cursor="hand2", style="Accent.TButton")
+
+
 
 
 def listen():
@@ -161,7 +172,7 @@ def listen():
 window = Tk()  # Create the window
 window.geometry("700x500")  # Set the size
 window.title("Translate")  # Set the title
-window.resizable(True, True)  # Disable resizing
+window.resizable(False, False)  # Disable resizing
 
 # Dark/Light mode toggle
 dark_mode = True
