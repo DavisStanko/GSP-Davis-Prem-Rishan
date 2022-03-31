@@ -17,19 +17,29 @@ Please be sure to install the following before running the program.
 - sqlite3
 - datetime
 - PyAudio
-- portaudio in your OS
+- Portaudio
 
 ## Usage
 
-Start the program by executing the main.py file.
-
-Input the text to be translated in the designated field. The language will be detected automatically.
-Select the output language from the drop down menu.
-Click the speak button when.
+- Start the program by executing the main.py file.
+- Input the text to be translated in the designated field.
+  - The language will be detected automatically.
+- Select the output language from the drop down menu.
+- Click the submit button when ready.
 
 The translated text will be simultaneously displayed and spoken.
 
-If you would like to display the program in light mode, click the appearance toggle at the top right corner.
+When possible, the program will speak the text with a language appropriate accent. This is not supported for all languages.
+
+To display the program in light mode, click the appearance toggle at the top right corner.
+
+## Compatibility
+
+Some operating systems modify Tkinter's styling.
+
+- Linux and BSD should not modify the styling at all and as such are the recommended operating systems for this project.
+- MacOS adds a thin border around buttons but the GUI is otherwise unchanged.
+- Windows messes up Text and Label boxes sizing, as well as making the list non-scrollable.
 
 ## Authors
 
