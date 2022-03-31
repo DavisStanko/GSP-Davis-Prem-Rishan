@@ -1,11 +1,18 @@
+import speech_recognition
 import speech_recognition as sr
 
-# https://realpython.com/python-speech-recognition/#how-speech-recognition-works-an-overview
 
 r = sr.Recognizer()  # set r as recognizer
 mic = sr.Microphone()  # initialize mic
 
-with mic as source:
-    audio = r.listen(source)  # listening for speech from mic
+try:
+    with mic as source:
+        r.adjust_for_ambient_noise(source)  # adjusting audio based on bg noise
+        audio = r.listen(source)  # listening for speech from mic
 
-print(r.recognize_google(audio))
+        print(r.recognize_google(audio))
+
+except speech_recognition.UnknownValueError:
+    print("Sorry, didn't understand that.")
+
+
