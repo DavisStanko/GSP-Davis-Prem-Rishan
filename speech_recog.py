@@ -13,10 +13,10 @@ class Recognizer:
     def __init__(self):
         self._start_listen = None
 
-    def listen(self):
+    def listening(self):
         global recognized_speech
 
-        if self.listen() is not None:
+        if self.listening() is not None:
             raise ListenError("Recognizer not listening.")
 
         try:

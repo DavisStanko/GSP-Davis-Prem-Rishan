@@ -4,18 +4,42 @@ from gtts import gTTS  # Google text to speech
 from deep_translator import GoogleTranslator  # Google Translator
 import playsound  # Play speech
 import sqlite3  # Storing past translations
-import datetime  #Getting date of translation
+import datetime  # Getting date of translation
+from speech_recog import Recognizer
 
 # Google translate language codes and language names
-choose_langauge = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian', 'az': 'azerbaijani', 'eu': 'basque', 'be': 'belarusian', 'bn': 'bengali', 'bs': 'bosnian', 'bg': 'bulgarian', 'ca': 'catalan', 'ceb': 'cebuano', 'ny': 'chichewa', 'zh-CN': 'chinese (simplified)', 'zh-TW': 'chinese (traditional)', 'co': 'corsican', 'hr': 'croatian', 'cs': 'czech', 'da': 'danish', 'nl': 'dutch', 'en': 'english', 'eo': 'esperanto', 'et': 'estonian', 'tl': 'filipino', 'fi': 'finnish', 'fr': 'french', 'fy': 'frisian', 'gl': 'galician', 'ka': 'georgian', 'de': 'german', 'el': 'greek', 'gu': 'gujarati', 'ht': 'haitian creole', 'ha': 'hausa', 'haw': 'hawaiian', 'iw': 'hebrew', 'hi': 'hindi', 'hmn': 'hmong', 'hu': 'hungarian', 'is': 'icelandic', 'ig': 'igbo', 'id': 'indonesian', 'ga': 'irish', 'it': 'italian', 'ja': 'japanese', 'jw': 'javanese', 'kn': 'kannada', 'kk': 'kazakh', 'km': 'khmer', 'ko': 'korean', 'ku': 'kurdish (kurmanji)', 'ky': 'kyrgyz', 'lo': 'lao', 'la': 'latin', 'lv': 'latvian', 'lt': 'lithuanian', 'lb': 'luxembourgish', 'mk': 'macedonian', 'mg': 'malagasy', 'ms': 'malay', 'ml': 'malayalam', 'mt': 'maltese', 'mi': 'maori', 'mr': 'marathi', 'mn': 'mongolian', 'my': 'myanmar (burmese)', 'ne': 'nepali', 'no': 'norwegian', 'ps': 'pashto', 'fa': 'persian', 'pl': 'polish', 'pt': 'portuguese', 'pa': 'punjabi', 'ro': 'romanian', 'ru': 'russian', 'sm': 'samoan', 'gd': 'scots gaelic', 'sr': 'serbian', 'st': 'sesotho', 'sn': 'shona', 'sd': 'sindhi', 'si': 'sinhala', 'sk': 'slovak', 'sl': 'slovenian', 'so': 'somali', 'es': 'spanish', 'su': 'sundanese', 'sw': 'swahili', 'sv': 'swedish', 'tg': 'tajik', 'ta': 'tamil', 'te': 'telugu', 'th': 'thai', 'tr': 'turkish', 'uk': 'ukrainian', 'ur': 'urdu', 'uz': 'uzbek', 'vi': 'vietnamese', 'cy': 'welsh', 'xh': 'xhosa', 'yi': 'yiddish', 'yo': 'yoruba', 'zu': 'zulu', 'fil': 'Filipino', 'he': 'Hebrew'}
+choose_langauge = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian',
+                   'az': 'azerbaijani', 'eu': 'basque', 'be': 'belarusian', 'bn': 'bengali', 'bs': 'bosnian',
+                   'bg': 'bulgarian', 'ca': 'catalan', 'ceb': 'cebuano', 'ny': 'chichewa',
+                   'zh-CN': 'chinese (simplified)', 'zh-TW': 'chinese (traditional)', 'co': 'corsican',
+                   'hr': 'croatian', 'cs': 'czech', 'da': 'danish', 'nl': 'dutch', 'en': 'english', 'eo': 'esperanto',
+                   'et': 'estonian', 'tl': 'filipino', 'fi': 'finnish', 'fr': 'french', 'fy': 'frisian',
+                   'gl': 'galician', 'ka': 'georgian', 'de': 'german', 'el': 'greek', 'gu': 'gujarati',
+                   'ht': 'haitian creole', 'ha': 'hausa', 'haw': 'hawaiian', 'iw': 'hebrew', 'hi': 'hindi',
+                   'hmn': 'hmong', 'hu': 'hungarian', 'is': 'icelandic', 'ig': 'igbo', 'id': 'indonesian',
+                   'ga': 'irish', 'it': 'italian', 'ja': 'japanese', 'jw': 'javanese', 'kn': 'kannada', 'kk': 'kazakh',
+                   'km': 'khmer', 'ko': 'korean', 'ku': 'kurdish (kurmanji)', 'ky': 'kyrgyz', 'lo': 'lao',
+                   'la': 'latin', 'lv': 'latvian', 'lt': 'lithuanian', 'lb': 'luxembourgish', 'mk': 'macedonian',
+                   'mg': 'malagasy', 'ms': 'malay', 'ml': 'malayalam', 'mt': 'maltese', 'mi': 'maori', 'mr': 'marathi',
+                   'mn': 'mongolian', 'my': 'myanmar (burmese)', 'ne': 'nepali', 'no': 'norwegian', 'ps': 'pashto',
+                   'fa': 'persian', 'pl': 'polish', 'pt': 'portuguese', 'pa': 'punjabi', 'ro': 'romanian',
+                   'ru': 'russian', 'sm': 'samoan', 'gd': 'scots gaelic', 'sr': 'serbian', 'st': 'sesotho',
+                   'sn': 'shona', 'sd': 'sindhi', 'si': 'sinhala', 'sk': 'slovak', 'sl': 'slovenian', 'so': 'somali',
+                   'es': 'spanish', 'su': 'sundanese', 'sw': 'swahili', 'sv': 'swedish', 'tg': 'tajik', 'ta': 'tamil',
+                   'te': 'telugu', 'th': 'thai', 'tr': 'turkish', 'uk': 'ukrainian', 'ur': 'urdu', 'uz': 'uzbek',
+                   'vi': 'vietnamese', 'cy': 'welsh', 'xh': 'xhosa', 'yi': 'yiddish', 'yo': 'yoruba', 'zu': 'zulu',
+                   'fil': 'Filipino', 'he': 'Hebrew'}
+
+rg = Recognizer()
+
+
 ##################################
 
-def create_product_table_UI() :
-
+def create_product_table_UI():
     create_table()
 
 
-def create_table() :
+def create_table():
     db_name = "translationHistory.db"
     sql = """create table History
             (Input text,
@@ -24,26 +48,26 @@ def create_table() :
             Date text)"""
     table_name = "History"
 
-    with sqlite3.connect(db_name) as db :
+    with sqlite3.connect(db_name) as db:
         cursor = db.cursor()
         cursor.execute("select name from sqlite_master where name=?", (table_name,))
         result = cursor.fetchall()
         keep_table = True
-        if len(result)==1 :
+        if len(result) == 1:
             response = input("The table {0} already exists, do you wish to recreate it? (y/n): ".format(table_name))
-            if response=='y' :
+            if response == 'y':
                 keep_table = False
                 print("The {0} table will be recreated - all existing data will be lost.".format(table_name))
                 cursor.execute("drop table if exists {0}".format(table_name))
                 db.commit()
-            else :
+            else:
                 print("The existing table was kept.")
-        else :
+        else:
             keep_table = False
             print("A new table was created.")
 
         # create the table if required (not keeping old one)
-        if not keep_table :
+        if not keep_table:
             cursor.execute(sql)
             db.commit()
 
@@ -102,19 +126,25 @@ def switch():  # Switch the theme
         dark_mode = False
         window.tk.call("set_theme", "light")
         copy.config(image=copyLight)
-        mic.config(image=micLight)
+        mic_button.config(image=micLight)
         history.config(image=historyLight)
     else:
         onButton.config(image=on)
         dark_mode = True
         window.tk.call("set_theme", "dark")
         copy.config(image=copyDark)
-        mic.config(image=micDark)
+        mic_button.config(image=micDark)
         history.config(image=historyDark)
+
 
 def submit_Button():
     submit()
     get_info()
+
+
+def listen():
+    rg.listening()
+    rg.paste(entryValue)
 
 
 window = Tk()  # Create the window
@@ -129,7 +159,7 @@ off = PhotoImage(file="light.png")
 onButton = Button(window, image=on, bd=0, cursor="hand2", command=switch)
 onButton.place(x=630, y=25)
 
-# Defualt theme
+# Default theme
 window.tk.call("source", "azure.tcl")
 window.tk.call("set_theme", "dark")
 
@@ -181,16 +211,15 @@ history.place(x=335, y=250)
 micDark = PhotoImage(file="mic-d.png")
 micLight = PhotoImage(file="mic-l.png")
 
-mic = Button(window, image=micDark, bd=0, cursor="hand2", command=copy)
-mic.place(x=335, y=300)
+mic_button = Button(window, image=micDark, bd=0, cursor="hand2", command=listen)
+mic_button.place(x=335, y=300)
 
-
-#Things to do
+# Things to do
 # Fix up create table code, get history to open new window to display past translation history, make it show
-#pre and post translation with language and time/date. Add option to clear database/history
+# pre and post translation with language and time/date. Add option to clear database/history
 # Make it easy to copy bits you need from history window
 # mic func to rishans STT code
-#In general make UI look tad nicer
+# In general make UI look tad nicer
 
 # tempCreate = Button(window, text='Create', command=create_table)
 # tempCreate.place(x=355, y=250)
