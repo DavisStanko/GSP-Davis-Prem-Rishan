@@ -67,7 +67,7 @@ def insert_data(values):
 def get_info():
     inputGet = entry.get("1.0", "end-1c")
     translatedResult = result["text"]
-    lang = get_key(option_variable.get())
+    lang = option_variable.get()
     current_date_time = (datetime.datetime.now())
     date = current_date_time.strftime("%Y-%m-%d")
     hours = current_date_time.strftime("%H:%M:%S")
@@ -114,16 +114,18 @@ def switch():  # Switch the theme
         onButton.config(image=off)
         dark_mode = False
         window.tk.call("set_theme", "light")
-        copy.config(image=copyLight)
-        mic_button.config(image=micLight)
-        history.config(image=historyLight)
+        history_win.tk.call("set_theme", "light")
+        copy.config(image=copy_light)
+        mic_button.config(image=mic_light)
+        history.config(image=history_light)
     else:
         onButton.config(image=on)
         dark_mode = True
         window.tk.call("set_theme", "dark")
-        copy.config(image=copyDark)
-        mic_button.config(image=micDark)
-        history.config(image=historyDark)
+        history_win.tk.call("set_theme", "dark")
+        copy.config(image=copy_dark)
+        mic_button.config(image=mic_dark)
+        history.config(image=history_dark)
 
 
 def submit_Button():
@@ -134,6 +136,21 @@ def submit_Button():
 def listen():
     rg.listening()
     rg.paste(entryValue)
+
+def history_window():
+    history_win = Tk()  # Create the window
+    history_win.geometry("500x500")  # Set the size
+    history_win.title("Translation History")  # Set the title
+    history_win.resizable(True, True)  # Disable resizing
+    history_win.tk.call("source", "azure.tcl")
+    history_win.tk.call("set_theme", "dark")
+
+    def close_history():
+        history_win.destroy()
+
+    close_button = ttk.Button(history_win, text="Close", cursor="hand2", style="Accent.TButton", command=close_history)
+    close_button.place(x=250, y=450)
+
 
 
 window = Tk()  # Create the window
@@ -185,22 +202,22 @@ clear = ttk.Button(window, text="Clear", cursor="hand2", style="Accent.TButton",
 clear.place(x=350, y=450)
 
 # copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
-copyDark = PhotoImage(file="copy-d.png")
-copyLight = PhotoImage(file="copy-l.png")
+copy_dark = PhotoImage(file="copy-d.png")
+copy_light = PhotoImage(file="copy-l.png")
 
-copy = Button(window, image=copyDark, bd=0, cursor="hand2", command=copy)
+copy = Button(window, image=copy_dark, bd=0, cursor="hand2", command=copy)
 copy.place(x=335, y=350)
 
-historyDark = PhotoImage(file="history-d.png")
-historyLight = PhotoImage(file="history-l.png")
+history_dark = PhotoImage(file="history-d.png")
+history_light = PhotoImage(file="history-l.png")
 
-history = Button(window, image=historyDark, bd=0, cursor="hand2", command=copy)
+history = Button(window, image=history_dark, bd=0, cursor="hand2", command=history_window)
 history.place(x=335, y=250)
 
-micDark = PhotoImage(file="mic-d.png")
-micLight = PhotoImage(file="mic-l.png")
+mic_dark = PhotoImage(file="mic-d.png")
+mic_light = PhotoImage(file="mic-l.png")
 
-mic_button = Button(window, image=micDark, bd=0, cursor="hand2", command=listen)
+mic_button = Button(window, image=mic_dark, bd=0, cursor="hand2", command=listen)
 mic_button.place(x=335, y=300)
 
 # Things to do
