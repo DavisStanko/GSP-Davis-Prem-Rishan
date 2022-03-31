@@ -24,6 +24,7 @@ Change input and output GUI to paragraph form to allow large inputs as well as c
 Make sure speech_recog works on computer with portaudio + pyaudio
 
 - Fixed + made modular (OOP)
+- Implemented into main and works great
 
 Fix accent
 
@@ -32,6 +33,9 @@ Follow style guide
 Update testing docs
 
 Create import module switch
+
+- In new menu Rishan created + mic appears when you need it
+- Can run program even if pyaudio not installed
 
 Move history_hui to main
 
