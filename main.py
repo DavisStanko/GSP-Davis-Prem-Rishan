@@ -67,7 +67,7 @@ def insert_data(values):
 def get_info():
     inputGet = entry.get("1.0", "end-1c")
     translatedResult = result["text"]
-    lang = get_key(option_variable.get())
+    lang = option_variable.get()
     current_date_time = (datetime.datetime.now())
     date = current_date_time.strftime("%Y-%m-%d")
     hours = current_date_time.strftime("%H:%M:%S")
