@@ -7,11 +7,10 @@ import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
 import history_gui
 
-"""from module_switch import ImportBlocker
-import sys
-sys.meta_path = [ImportBlocker('speech_recog')]"""
-
-from speech_recog import Recognizer
+try:
+    from speech_recog import Recognizer
+except ImportError:
+    pass
 
 # Google translate language codes and language names
 choose_langauge = {"af": "afrikaans", "sq": "albanian", "am": "amharic", "ar": "arabic", "hy": "armenian",
@@ -36,12 +35,24 @@ choose_langauge = {"af": "afrikaans", "sq": "albanian", "am": "amharic", "ar": "
                    "vi": "vietnamese", "cy": "welsh", "xh": "xhosa", "yi": "yiddish", "yo": "yoruba", "zu": "zulu",
                    "fil": "Filipino", "he": "Hebrew"}
 
-rg = Recognizer()
+try:
+    rg = Recognizer()
+except NameError:
+    pass
 
 d_l_buttons = 0
 
+start_value = True
 
 ##################################
+def startup():
+    if start_value:
+        from module_switch import ImportBlocker
+        import sys
+        sys.meta_path = [ImportBlocker('speech_recog')]
+    else:
+        pass
+
 
 def create_product_table_UI():
     create_table()
@@ -114,12 +125,12 @@ def submit():  # Translate and display the text
     try:
         # Passing the text and language, speed, and accent to gtts
         myobj = gTTS(text=ttk.output, slow=False, lang=lang)
-        myobj.save("speech.mp3")  # Saving the converted audio in an mp3 file
+        myobj.save("speech.mp3")  # Saving the converted audio in a mp3 file
         playsound.playsound("speech.mp3", True)  # Playing the converted file
     except ValueError:
         # Passing the text and language, speed, and accent to gtts
         myobj = gTTS(text=ttk.output, slow=False, lang="en")
-        myobj.save("speech.mp3")  # Saving the converted audio in an mp3 file
+        myobj.save("speech.mp3")  # Saving the converted audio in a mp3 file
         playsound.playsound("speech.mp3", True)  # Playing the converted file
     except AssertionError:
         pass
@@ -186,8 +197,17 @@ def history_window():
     clear_history = ttk.Button(history_win, text="Clear History", cursor="hand2", style="Accent.TButton")
 
 
+def enable_speech():
+    mic_button.place(x=335, y=300)
+
+
 def listen():
+    global start_value
+    start_value = False
+
     entry.delete(1.0, "end")
+    result.config(text="")
+
     rg.listening()
     detected = rg.paste(entryValue)
     entry.insert(END, detected)
@@ -258,7 +278,14 @@ mic_dark = PhotoImage(file="mic-d.png")
 mic_light = PhotoImage(file="mic-l.png")
 
 mic_button = Button(window, image=mic_dark, bd=0, cursor="hand2", command=listen)
-mic_button.place(x=335, y=300)
+mic_button.place(x=335, y=600)
+
+# Menu
+upper_menu = Menu(window)
+window.config(menu=upper_menu)
+options_menu = Menu(upper_menu)
+upper_menu.add_cascade(label="Options", menu=options_menu)
+options_menu.add_command(label="Enable Speech", command=enable_speech)
 
 # Things to do
 # Fix up create table code, get history to open new window to display past translation history, make it show
@@ -269,5 +296,7 @@ mic_button.place(x=335, y=300)
 
 # tempCreate = Button(window, text="Create", command=create_table)
 # tempCreate.place(x=355, y=250)
+
+startup()
 
 window.mainloop()

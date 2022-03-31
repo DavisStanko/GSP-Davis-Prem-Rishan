@@ -26,16 +26,3 @@ class Recognizer:
     def paste(self, entry):
         entry = str(recognized_speech)
         return entry
-
-
-"""try:
-    with mic as source:
-        r.adjust_for_ambient_noise(source)  # adjusting audio based on bg noise
-        audio = r.listen(source)  # listening for speech from mic
-
-        recognized_speech = r.recognize_google(audio)
-        print(recognized_speech)
-
-except speech_recognition.UnknownValueError:
-    recognized_speech = "Sorry, didn't understand that."
-    print(recognized_speech)"""
