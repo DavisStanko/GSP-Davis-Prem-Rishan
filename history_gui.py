@@ -26,11 +26,11 @@ def query_database():
         for record in records:
             if count % 2 == 0:
                 my_tree.insert(parent='', index='end', iid=count, text='',
-                               values=(record[0], record[2], record[3], record[4]),
+                               values=(record[1], record[2], record[3], record[4]),
                                tags=('evenrow',))
             else:
                 my_tree.insert(parent='', index='end', iid=count, text='',
-                               values=(record[0], record[2], record[3], record[4]),
+                               values=(record[1], record[2], record[3], record[4]),
                                tags=('oddrow',))
             # increment counter
             count += 1
