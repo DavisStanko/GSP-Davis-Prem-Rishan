@@ -169,7 +169,7 @@ def switch():  # Switch the theme
 
 
 def submit_Button():
-    try:            # puts translated text to db file if speech fails
+    try:  # puts translated text to db file if speech fails
         submit()
     except:
         pass
@@ -191,6 +191,7 @@ def enable_speech():
 def listen():
     global start_value
     start_value = False
+    mic_value = True
 
     entry.delete(1.0, "end")
     result.config(text="")
@@ -198,6 +199,18 @@ def listen():
     rg.listening()
     detected = rg.paste(entryValue)
     entry.insert(END, detected)
+
+    mic_value = False
+
+
+def mic_enabled():
+    global mic_value
+
+    mic_value = True
+    if mic_value:
+        mic_button.config(image=mic_enable)
+    else:
+        pass
 
 
 window = Tk()  # Create the window
@@ -263,7 +276,9 @@ history.place(x=335, y=250)
 
 mic_dark = PhotoImage(file="mic-d.png")
 mic_light = PhotoImage(file="mic-l.png")
+mic_enable = PhotoImage(file="mic-green.png")
 
+mic_value = False
 mic_button = Button(window, image=mic_dark, bd=0, cursor="hand2", command=listen)
 
 # Menu
