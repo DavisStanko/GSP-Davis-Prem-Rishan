@@ -28,6 +28,8 @@ Every contributor has had input and has contributed to every aspect of the progr
   - Module on/off switch
     - Ignores speech_recog
       - Installing PyAudio/portaudio no longer issue
+  - Exception handling
+    - If language has no pairing accent, use english accent
 - Frontend
   - GUI skeleton
   - SQL Treeview
