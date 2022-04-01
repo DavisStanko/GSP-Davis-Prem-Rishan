@@ -22,9 +22,14 @@ Every contributor has had input and has contributed to every aspect of the progr
 ## Rishan
 
 - Backend
+  - Translations skeleton
   - Speech to text
+    - Able to recognise audio in ambient noise
+  - Module on/off switch
+    - Ignores speech_recog
+      - Installing PyAudio/portaudio no longer issue
 - Frontend
-  - Gui skeleton
+  - GUI skeleton
   - SQL Treeview
 
 ## Prem
