@@ -31,6 +31,9 @@ Every contributor has had input and has contributed to every aspect of the progr
 - Frontend
   - GUI skeleton
   - SQL Treeview
+- Documentation
+  - Updates
+    - Schedule + Testing
 
 ## Prem
 
