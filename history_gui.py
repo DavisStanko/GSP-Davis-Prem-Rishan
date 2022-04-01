@@ -104,7 +104,6 @@ def close_history():
     history_win.destroy()
 
 
-
 def copy_1():
     history_win.clipboard_clear()
     history_win.clipboard_append(input_box.get())
@@ -115,7 +114,6 @@ def copy_2():
     history_win.clipboard_clear()
     history_win.clipboard_append(translation_box.get())
     history_win.update()
-
 
 
 # Treeview
@@ -159,7 +157,7 @@ else:
 with sqlite3.connect("translation_history.db") as db:
     cursor = db.cursor()
 
-    cursor.execute("""CREATE TABLE if not exists Product (
+    cursor.execute("""CREATE TABLE if not exists History (
                     Input text,
                     Translation text,
                     Language text,
