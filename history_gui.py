@@ -40,9 +40,40 @@ def query_database():
         db.commit()
 
 
+def update_treeview(records):
+    my_tree.delete(*my_tree.get_children())
+
+    with sqlite3.connect("translation_history.db") as db:
+        cursor = db.cursor()
+        cursor.execute("SELECT rowid, * FROM History")
+
+        for item in records:
+            my_tree.insert("", 'end', iid=item[0], text=item[0],
+                           values=(item[1], item[2], item[3], item[4]))
+            db.commit()
+
+
+def clear_history():
+    with sqlite3.connect("translation_history.db") as db:
+        """
+           Delete all rows in the tasks table
+           :param conn: Connection to the SQLite database
+           :return:
+           """
+        sql = 'DELETE FROM History'
+        cur = db.cursor()
+        cur.execute(sql)
+
+        records = cur.fetchall()
+        update_treeview(records)
+        db.commit()
+
+
+def close_history():
+    history_win.destroy()
+
+
 # Treeview
-
-
 tree_frame = ttk.Frame(history_win)
 tree_frame.pack(pady=10)
 
@@ -95,6 +126,9 @@ with sqlite3.connect("translation_history.db") as db:
 
 close_button = ttk.Button(history_win, text="Close", cursor="hand2", style="Accent.TButton", command="close_history")
 close_button.place(x=250, y=350)
+
+clear_button = ttk.Button(history_win, text="Clear History", cursor="hand2", style="Accent.TButton", command=clear_history)
+clear_button.place(x=350, y=350)
 
 # Add History to treeview
 query_database()
