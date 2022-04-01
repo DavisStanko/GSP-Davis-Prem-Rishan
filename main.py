@@ -147,6 +147,7 @@ def clear():  # Clear both text boxes
 def copy():  # Copy the text
     window.clipboard_clear()
     window.clipboard_append(result["text"])
+    window.update()
 
 
 def switch():  # Switch the theme
@@ -369,7 +370,7 @@ submit1 = ttk.Button(text="Submit", style="Accent.TButton", command=submit_Butto
 submit1.place(x=250, y=450)
 
 result = Label(window, width=35, height=20, anchor=NW,
-               borderwidth=5, relief=RIDGE, wraplength=300, justify=LEFT)
+               borderwidth=5, relief=RIDGE, wraplength=250, justify=LEFT)
 result.place(x=375, y=153)
 
 clear = ttk.Button(window, text="Clear", cursor="hand2", style="Accent.TButton", command=clear)
