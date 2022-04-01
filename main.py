@@ -6,31 +6,25 @@ import playsound  # Play speech
 import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
 
+start_value = 0
+
 
 def startup():
     global rg
+    rg = None
 
     if start_value == 0:
         from module_switch import ImportBlocker
         import sys
 
         sys.meta_path = [ImportBlocker('speech_recog')]
-        sys.meta_path = [ImportBlocker('history_gui')]
-    elif start_value == 1:
-        try:
-            from speech_recog import Recognizer
-        except ImportError:
-            pass
 
-        try:
-            rg = Recognizer()
-        except NameError:
-            pass
+    elif start_value == 1:
+        from speech_recog import Recognizer
+        rg = Recognizer()
+
     elif start_value == 2:
-        try:
-            import history_gui
-        except ImportError:
-            pass
+        import history_gui
 
 
 # Google translate language codes and language names
@@ -57,8 +51,6 @@ choose_langauge = {"af": "Afrikaans", "sq": "Albanian", "am": "Amharic", "ar": "
                    "fil": "Filipino", "he": "Hebrew"}
 
 d_l_buttons = 0
-
-start_value = 0
 
 
 ##################################
@@ -193,7 +185,10 @@ def submit_Button():
 
 # kinda works
 def history_window():
-    exec(open("./history_gui.py").read())
+    global start_value
+    # exec(open("./history_gui.py").read())
+    start_value = 2
+    startup()
 
 
 def enable_speech():
@@ -205,7 +200,8 @@ def enable_speech():
 
 def listen():
     global start_value
-    start_value = 2
+    start_value = 1
+    startup()
     mic_value = True
 
     entry.delete(1.0, "end")
