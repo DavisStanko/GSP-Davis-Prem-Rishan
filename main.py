@@ -5,7 +5,11 @@ from deep_translator import GoogleTranslator  # Google Translator
 import playsound  # Play speech
 import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
-import history_gui
+
+from module_switch import ImportBlocker
+import sys
+
+sys.meta_path = [ImportBlocker('speech_recog')]
 
 try:
     from speech_recog import Recognizer
@@ -46,14 +50,6 @@ start_value = True
 
 
 ##################################
-def startup():
-    if start_value:
-        from module_switch import ImportBlocker
-        import sys
-        sys.meta_path = [ImportBlocker('speech_recog')]
-    else:
-        pass
-
 
 def create_product_table_UI():
     create_table()
@@ -278,7 +274,5 @@ options_menu.add_command(label="Enable Speech", command=enable_speech)
 
 # tempCreate = Button(window, text="Create", command=create_table)
 # tempCreate.place(x=355, y=250)
-
-startup()
 
 window.mainloop()
