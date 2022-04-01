@@ -170,8 +170,14 @@ def switch():  # Switch the theme
 
 
 def submit_Button():
-    submit()
-    get_info()
+    try:
+        submit()
+    except:
+        pass
+    try:
+        get_info()
+    except:
+        pass
 
 
 def close_history():
