@@ -104,6 +104,20 @@ def close_history():
     history_win.destroy()
 
 
+
+def copy_1():
+    history_win.clipboard_clear()
+    history_win.clipboard_append(input_box.get())
+    history_win.update()
+
+
+def copy_2():
+    history_win.clipboard_clear()
+    history_win.clipboard_append(translation_box.get())
+    history_win.update()
+
+
+
 # Treeview
 tree_frame = ttk.Frame(history_win)
 tree_frame.pack(pady=10)
@@ -159,28 +173,28 @@ input_value = StringVar()
 translation_value = StringVar()
 
 # Input + Translation data
-input_box = Entry(history_win, textvariable=input_value, state=DISABLED, width=100)
-input_box.place(x=100, y=350)
+input_box = ttk.Entry(history_win, textvariable=input_value, state=DISABLED, width=100)
+input_box.place(x=100, y=330)
 
-translation_box = Entry(history_win, textvariable=translation_value, state=DISABLED, width=100)
-translation_box.place(x=100, y=375)
+translation_box = ttk.Entry(history_win, textvariable=translation_value, state=DISABLED, width=100)
+translation_box.place(x=100, y=365)
 
 # Widgets
 close_button = ttk.Button(history_win, text="Close", cursor="hand2", style="Accent.TButton", command="close_history")
-close_button.place(x=250, y=300)
+close_button.place(x=400, y=290)
 
 clear_button = ttk.Button(history_win, text="Clear History", cursor="hand2", style="Accent.TButton",
                           command=clear_history)
-clear_button.place(x=350, y=300)
+clear_button.place(x=500, y=290)
 
-copy_dark = PhotoImage(file="copy dark-xs.png")
-copy_light = PhotoImage(file="copy light-xs.png")
+copy_dark = PhotoImage(file="copy-d.png")
+copy_light = PhotoImage(file="copy-l.png")
 
-copy_1 = Button(history_win, image=copy_dark, bd=0, cursor="hand2")
-copy_1.place(x=810, y=350)
+copy_button_1 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_1)
+copy_button_1.place(x=820, y=330)
 # Make these copy buttons change form light/dark once linked with main py
-copy_2 = Button(history_win, image=copy_dark, bd=0, cursor="hand2")
-copy_2.place(x=810, y=375)
+copy_button_2 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_2)
+copy_button_2.place(x=820, y=365)
 
 # Add History to treeview
 query_database()
