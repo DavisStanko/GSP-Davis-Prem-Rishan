@@ -68,9 +68,17 @@ def select_record(e):
         # Grab record values
         values = my_tree.item(selected, 'values')
 
-        # outputs to entry boxes
+        # Make entries able to edit
+        input_box.config(state=NORMAL)
+        translation_box.config(state=NORMAL)
+
+        # Outputs to entry boxes
         input_box.insert(0, values[0])
         translation_box.insert(0, values[1])
+
+        """# Make entries unable to edit
+        input_box.config(state=DISABLED)
+        translation_box.config(state=DISABLED)"""
 
     except IndexError:
         pass
@@ -146,23 +154,23 @@ with sqlite3.connect("translation_history.db") as db:
 
     db.commit()
 
-
 # Entry boxes
 input_value = StringVar()
 translation_value = StringVar()
 
 # Input + Translation data
-input_box = Entry(history_win, textvariable=input_value, width=100)
+input_box = Entry(history_win, textvariable=input_value, state=DISABLED, width=100)
 input_box.place(x=100, y=350)
 
-translation_box = Entry(history_win, textvariable=translation_value, width=100)
+translation_box = Entry(history_win, textvariable=translation_value, state=DISABLED, width=100)
 translation_box.place(x=100, y=375)
 
 # Widgets
 close_button = ttk.Button(history_win, text="Close", cursor="hand2", style="Accent.TButton", command="close_history")
 close_button.place(x=250, y=300)
 
-clear_button = ttk.Button(history_win, text="Clear History", cursor="hand2", style="Accent.TButton", command=clear_history)
+clear_button = ttk.Button(history_win, text="Clear History", cursor="hand2", style="Accent.TButton",
+                          command=clear_history)
 clear_button.place(x=350, y=300)
 
 # Add History to treeview
@@ -170,5 +178,7 @@ query_database()
 
 # Bindings
 my_tree.bind("<Double-1>", select_record)
+input_box.bind("<1>", lambda e: input_box.focus_set())
+translation_box.bind("<1>", lambda e: translation_box.focus_set())
 
 history_win.mainloop()
