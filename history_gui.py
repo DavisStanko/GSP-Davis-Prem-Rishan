@@ -4,6 +4,9 @@ import sqlite3
 import csv
 import os
 
+"""NEEDS TO BE FORMATTED LIKE IN MAIN"""
+
+
 history_win = Tk()  # Create the window
 history_win.geometry("1000x400")  # Set the size
 history_win.title("Translation History")  # Set the title
