@@ -102,7 +102,6 @@ def insert_data(values):
 
 
 def get_info():
-
     input_get = entry.get("1.0", "end-1c")
     translatedResult = result["text"]
     lang = option_variable.get()
