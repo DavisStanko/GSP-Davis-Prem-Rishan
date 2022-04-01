@@ -43,9 +43,9 @@ def query_database():
 def update_treeview(records):
     my_tree.delete(*my_tree.get_children())
 
-    with sqlite3.connect("coffee_shop.db") as db:
+    with sqlite3.connect("translation_history.db") as db:
         cursor = db.cursor()
-        cursor.execute("SELECT rowid, * FROM Product")
+        cursor.execute("SELECT rowid, * FROM History")
 
         for item in records:
             my_tree.insert("", 'end', iid=item[0], text=item[0],
