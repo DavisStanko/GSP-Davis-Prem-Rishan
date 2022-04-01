@@ -182,6 +182,7 @@ def submit_Button():
         pass
 
 
+# kinda works
 def history_window():
     exec(open('history_gui.py').read())
 
