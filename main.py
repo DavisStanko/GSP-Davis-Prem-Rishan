@@ -415,13 +415,6 @@ options_menu = Menu(upper_menu)
 upper_menu.add_cascade(label="Options", menu=options_menu)
 options_menu.add_command(label="Enable Speech", command=enable_speech)
 
-# Things to do
-# Fix up create table code, get history to open new window to display past translation history, make it show
-# pre and post translation with language and time/date. Add option to clear database/history
-# Make it easy to copy bits you need from history window
-# mic func to rishans STT code
-# In general make UI look tad nicer
-
 # tempCreate = Button(window, text="Create", command=create_table)
 # tempCreate.place(x=355, y=250)
 

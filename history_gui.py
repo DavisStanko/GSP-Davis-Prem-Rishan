@@ -173,6 +173,15 @@ clear_button = ttk.Button(history_win, text="Clear History", cursor="hand2", sty
                           command=clear_history)
 clear_button.place(x=350, y=300)
 
+copy_dark = PhotoImage(file="copy dark-xs.png")
+copy_light = PhotoImage(file="copy light-xs.png")
+
+copy_1 = Button(history_win, image=copy_dark, bd=0, cursor="hand2")
+copy_1.place(x=810, y=350)
+# Make these copy buttons change form light/dark once linked with main py
+copy_2 = Button(history_win, image=copy_dark, bd=0, cursor="hand2")
+copy_2.place(x=810, y=375)
+
 # Add History to treeview
 query_database()
 
