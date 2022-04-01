@@ -53,6 +53,29 @@ def update_treeview(records):
             db.commit()
 
 
+def clear_entries():
+    input_box.delete(0, END)
+    translation_box.delete(0, END)
+
+
+def select_record(e):
+    try:
+        # Clear entry boxes
+        clear_entries()
+
+        # Grab record Number
+        selected = my_tree.focus()
+        # Grab record values
+        values = my_tree.item(selected, 'values')
+
+        # outputs to entry boxes
+        input_box.insert(0, values[0])
+        translation_box.insert(0, values[1])
+
+    except IndexError:
+        pass
+
+
 def clear_history():
     with sqlite3.connect("translation_history.db") as db:
         """
@@ -103,11 +126,10 @@ my_tree.heading("Language", text="Language", anchor=CENTER, command="sort_sp")
 my_tree.heading("Date", text="Date", anchor=CENTER, command="sort_pp")
 
 # Striped Row Tags
-# Striped Row Tags
 if d_l_buttons == 1:
     my_tree.tag_configure('oddrow', background="#f4f2f2")
     my_tree.tag_configure('evenrow', background="#ffffff")
-else :
+else:
     my_tree.tag_configure('evenrow', background="#303030")
     my_tree.tag_configure('oddrow', background="#3f3f3f")
 
@@ -124,13 +146,29 @@ with sqlite3.connect("translation_history.db") as db:
 
     db.commit()
 
+
+# Entry boxes
+input_value = StringVar()
+translation_value = StringVar()
+
+# Input + Translation data
+input_box = Entry(history_win, textvariable=input_value, width=100)
+input_box.place(x=100, y=350)
+
+translation_box = Entry(history_win, textvariable=translation_value, width=100)
+translation_box.place(x=100, y=375)
+
+# Widgets
 close_button = ttk.Button(history_win, text="Close", cursor="hand2", style="Accent.TButton", command="close_history")
-close_button.place(x=250, y=350)
+close_button.place(x=250, y=300)
 
 clear_button = ttk.Button(history_win, text="Clear History", cursor="hand2", style="Accent.TButton", command=clear_history)
-clear_button.place(x=350, y=350)
+clear_button.place(x=350, y=300)
 
 # Add History to treeview
 query_database()
+
+# Bindings
+my_tree.bind("<Double-1>", select_record)
 
 history_win.mainloop()
