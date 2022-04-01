@@ -178,7 +178,7 @@ translation_box = ttk.Entry(history_win, textvariable=translation_value, state=D
 translation_box.place(x=100, y=365)
 
 # Widgets
-close_button = ttk.Button(history_win, text="Close", cursor="hand2", style="Accent.TButton", command="close_history")
+close_button = ttk.Button(history_win, text="Close", cursor="hand2", style="Accent.TButton", command=close_history)
 close_button.place(x=400, y=290)
 
 clear_button = ttk.Button(history_win, text="Clear History", cursor="hand2", style="Accent.TButton",
