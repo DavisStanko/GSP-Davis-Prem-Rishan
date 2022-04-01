@@ -3,7 +3,6 @@ from tkinter import ttk, messagebox, filedialog
 import sqlite3
 import csv
 import os
-d_l_buttons = 0
 
 history_win = Tk()  # Create the window
 history_win.geometry("1000x400")  # Set the size
@@ -39,10 +38,20 @@ def query_database():
         db.commit()
 
 
-tree_frame = ttk.Frame(history_win)
+# Treeview
+style = ttk.Style()
+style.theme_use("default")
+style.configure("Treeview",
+                background="#D3D3D3",
+                foreground="black",
+                rowheight=25,
+                fieldbackground="#D3D3D3")
+style.map("Treeview", backgroun=[("selected", "black")])
+
+tree_frame = Frame(history_win)
 tree_frame.pack(pady=10)
 
-tree_scroll = ttk.Scrollbar(tree_frame)
+tree_scroll = Scrollbar(tree_frame)
 tree_scroll.pack(side=RIGHT, fill=Y)
 
 my_tree = ttk.Treeview(tree_frame, yscrollcommand=tree_scroll.set, selectmode="extended")
@@ -68,12 +77,8 @@ my_tree.heading("Language", text="Language", anchor=CENTER, command="sort_sp")
 my_tree.heading("Date", text="Date", anchor=CENTER, command="sort_pp")
 
 # Striped Row Tags
-if d_l_buttons==1 :
-    my_tree.tag_configure('oddrow', background="#f4f2f2")
-    my_tree.tag_configure('evenrow', background="#ffffff")
-else :
-    my_tree.tag_configure('evenrow', background="#303030")
-    my_tree.tag_configure('oddrow', background="#3f3f3f")
+my_tree.tag_configure('oddrow', background="whitesmoke")
+my_tree.tag_configure('evenrow', background="white")
 
 # connect database
 with sqlite3.connect("translation_history.db") as db:
