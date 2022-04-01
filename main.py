@@ -5,7 +5,7 @@ from deep_translator import GoogleTranslator  # Google Translator
 import playsound  # Play speech
 import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
-import history_gui
+
 
 try:
     from speech_recog import Recognizer
@@ -101,15 +101,18 @@ def insert_data(values):
 
 
 def get_info():
-    inputGet = entry.get("1.0", "end-1c")
+
+    input_get = entry.get("1.0", "end-1c")
     translatedResult = result["text"]
     lang = option_variable.get()
     current_date_time = (datetime.datetime.now())
     date = current_date_time.strftime("%Y-%m-%d")
     hours = current_date_time.strftime("%H:%M:%S")
-
-    values = (inputGet, translatedResult, lang, date)
-    insert_data(values)
+    if len(input_get) == 0:
+        return
+    else:
+        values = (input_get, translatedResult, lang, date)
+        insert_data(values)
 
 
 def get_key(val):  # Get key from value
@@ -176,25 +179,130 @@ def close_history():
     history_win.destroy()
 
 
-# def clear_history():
-
+def clear_history():
+    with sqlite3.connect("translation_history.db") as db :
+        """
+           Delete all rows in the tasks table
+           :param conn: Connection to the SQLite database
+           :return:
+           """
+        sql = 'DELETE FROM History'
+        cur = db.cursor()
+        cur.execute(sql)
+        db.commit()
+        history_win.destroy() #For now
+        #Need to figure out how to update tree viewer to show data once cleared
 
 def history_window():
     global history_win
-
+    try:
+        history_win.destroy()
+    except:
+        pass
     history_win = Tk()  # Create the window
-    history_win.geometry("500x500")  # Set the size
+    history_win.geometry("1000x500")  # Set the size
     history_win.title("Translation History")  # Set the title
     history_win.resizable(False, False)  # Disable resizing
     history_win.tk.call("source", "azure.tcl")
     history_win.tk.call("set_theme", "dark")
     if d_l_buttons == 1:
         history_win.tk.call("set_theme", "light")
+
     else:
         history_win.tk.call("set_theme", "dark")
+
     close_button = ttk.Button(history_win, text="Close", cursor="hand2", style="Accent.TButton", command=close_history)
     close_button.place(x=250, y=450)
-    clear_history = ttk.Button(history_win, text="Clear History", cursor="hand2", style="Accent.TButton")
+    clear_history_b = ttk.Button(history_win, text="Clear History", cursor="hand2", style="Accent.TButton", command=clear_history)
+    clear_history_b.place(x=300, y=450)
+
+    def query_database():
+        with sqlite3.connect("translation_history.db") as db :
+            cursor = db.cursor()
+
+            cursor.execute("SELECT rowid, * FROM History")
+            records = cursor.fetchall()
+
+            # Add data to the screen
+            global count
+            count = 0
+
+            for record in records :
+                if count % 2==0 :
+                    my_tree.insert(parent='', index='end', iid=count, text='',
+                                   values=(record[1], record[2], record[3], record[4]),
+                                   tags=('evenrow',))
+                else :
+                    my_tree.insert(parent='', index='end', iid=count, text='',
+                                   values=(record[1], record[2], record[3], record[4]),
+                                   tags=('oddrow',))
+                # increment counter
+                count += 1
+
+            db.commit()
+
+    # Treeview
+    style = ttk.Style(history_win)
+
+    # style.configure("Treeview",
+    #                 background="#D3D3D3",
+    #                 foreground="black",
+    #                 rowheight=25,
+    #                 fieldbackground="#D3D3D3")
+    # style.map("Treeview", backgroun=[("selected", "black")])
+
+    tree_frame = ttk.Frame(history_win)
+    tree_frame.pack(pady=10)
+
+    tree_scroll = ttk.Scrollbar(tree_frame)
+    tree_scroll.pack(side=RIGHT, fill=Y)
+
+    my_tree = ttk.Treeview(tree_frame, yscrollcommand=tree_scroll.set, selectmode="extended")
+    my_tree.pack()
+
+    tree_scroll.config(command=my_tree.yview)
+
+    # Define Columns
+    my_tree['columns'] = ("Input", "Translation", "Language", "Date")
+
+    # Format Columns
+    my_tree.column("#0", width=0, stretch=NO)
+    my_tree.column("Input", anchor=W, width=330)
+    my_tree.column("Translation", anchor=W, width=330)
+    my_tree.column("Language", anchor=CENTER, width=145)
+    my_tree.column("Date", anchor=CENTER, width=145)
+
+    # Create Headings
+    my_tree.heading("#0", text="", anchor=W)
+    my_tree.heading("Input", text="Input", anchor=W, command="sort_id")
+    my_tree.heading("Translation", text="Translation", anchor=W, command="sort_name")
+    my_tree.heading("Language", text="Language", anchor=CENTER, command="sort_sp")
+    my_tree.heading("Date", text="Date", anchor=CENTER, command="sort_pp")
+
+    # Striped Row Tags
+    if d_l_buttons == 1:
+        my_tree.tag_configure('oddrow', background="#f4f2f2")
+        my_tree.tag_configure('evenrow', background="#ffffff")
+    else:
+        my_tree.tag_configure('evenrow', background="#303030")
+        my_tree.tag_configure('oddrow', background="#3f3f3f")
+
+    # connect database
+    with sqlite3.connect("translation_history.db") as db :
+        cursor = db.cursor()
+
+        cursor.execute("""CREATE TABLE if not exists Product (
+                        Input text,
+                        Translation text,
+                        Language text,
+                        Date text)
+                        """)
+
+        db.commit()
+
+    query_database()
+
+    history_win.mainloop()
 
 
 def enable_speech():
