@@ -7,7 +7,7 @@ import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
 
 
-def startup():
+"""def startup():
     global rg
 
     if start_value == 0:
@@ -30,7 +30,7 @@ def startup():
         try:
             import history_gui
         except ImportError:
-            pass
+            pass"""
 
 
 # Google translate language codes and language names
