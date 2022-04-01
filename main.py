@@ -407,7 +407,6 @@ mic_dark = PhotoImage(file="mic-d.png")
 mic_light = PhotoImage(file="mic-l.png")
 
 mic_button = Button(window, image=mic_dark, bd=0, cursor="hand2", command=listen)
-mic_button.place(x=335, y=600)
 
 # Menu
 upper_menu = Menu(window)
