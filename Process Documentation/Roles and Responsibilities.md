@@ -22,10 +22,22 @@ Every contributor has had input and has contributed to every aspect of the progr
 ## Rishan
 
 - Backend
+  - Translations skeleton
   - Speech to text
+    - Able to recognise audio in ambient noise
+  - Module on/off switch
+    - Ignores speech_recog
+      - Installing PyAudio/portaudio no longer issue
+  - Get key
+    - Retrieve according key from choose_language value
+  - Exception handling
+    - If language has no pairing accent, use english accent
 - Frontend
-  - Gui skeleton
+  - GUI skeleton
   - SQL Treeview
+- Documentation
+  - Updates
+    - Schedule + Testing
 
 ## Prem
 
