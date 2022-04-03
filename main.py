@@ -6,6 +6,24 @@ import playsound  # Play speech
 import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
 
+# Python program get current working directory using os.getcwd()
+import history_gui
+
+# importing os module
+import os
+# Get the current directory path
+current_directory = os.getcwd()
+# Print the current working directory
+print("Current working directory:", current_directory)
+# Get the script path and the file name
+foldername = os.path.basename(current_directory)
+
+scriptpath = os.path.realpath(__file__)
+# Print the script file absolute path
+print("Script file path is : " + scriptpath)
+from history_gui import create_history_window
+
+
 start_value = 0
 
 
@@ -24,7 +42,23 @@ def startup():
         rg = Recognizer()
 
     elif start_value == 2:
-        import history_gui
+        pass
+
+        '''# importing os module
+        import os
+        # Get the current directory path
+        current_directory = os.getcwd()
+        # Print the current working directory
+        print("Current working directory:", current_directory)
+        # Get the script path and the file name
+        foldername = os.path.basename(current_directory)
+
+        scriptpath = os.path.realpath(__file__)
+        # Print the script file absolute path
+        print("Script file path is : " + scriptpath)
+        from history_gui import create_history_window'''
+
+
 
 
 # Google translate language codes and language names
