@@ -29,18 +29,10 @@ def startup():
     global rg
     rg = None
 
-    if start_value == 0:
-        from module_switch import ImportBlocker
-        import sys
-
-        sys.meta_path = [ImportBlocker('speech_recog')]
-
-    elif start_value == 1:
+    if start_value == 1:
         from speech_recog import Recognizer
         rg = Recognizer()
-
-    elif start_value == 2:
-        create_history_window()
+        
 
 
 # Google translate language codes and language names
@@ -239,6 +231,18 @@ def mic_enabled():
     else:
         pass
 
+    
+def help_option():
+    help_win = Tk()  # Create the window
+    help_win.geometry("400x400")  # Set the size
+    help_win.title("Help")  # Set the title
+    help_win.resizable(False, False)  # Disable resizing
+    help_win.tk.call("source", "azure.tcl")
+    help_win.tk.call("set_theme", "dark")
+
+    instructions = Label(help_win, text="Instructions", font=('Helvetica', 20))
+    instructions.pack(side=TOP, anchor=NW, padx=10, pady=10)
+    
 
 window = Tk()  # Create the window
 window.geometry("700x500")  # Set the size
