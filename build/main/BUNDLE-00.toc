@@ -1,3 +1,0 @@
-([('main',
-   '/Users/ics34u_13/Documents/GSP-Davis-Prem-Rishan/dist/main',
-   'EXECUTABLE')],)
