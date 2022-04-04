@@ -1,8 +1,7 @@
 from tkinter import *
-from tkinter import ttk, messagebox, filedialog
+from tkinter import ttk
 import sqlite3
-import csv
-import os
+
 
 d_l_buttons = 0
 
