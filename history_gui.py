@@ -11,7 +11,7 @@ def create_history_window():
     history_win.geometry("1000x400")  # Set the size
     history_win.title("Translation History")  # Set the title
     history_win.resizable(False, False)  # Disable resizing
-    history_win.tk.call("source", "azure.tcl")
+    history_win.tk.call("source", "data/azure.tcl")
     history_win.tk.call("set_theme", "dark")
 
     def query_database():
@@ -177,8 +177,8 @@ def create_history_window():
                               command=clear_history)
     clear_button.place(x=500, y=290)
 
-    copy_dark = PhotoImage(file="copy-d.png")
-    copy_light = PhotoImage(file="copy-l.png")
+    copy_dark = PhotoImage(file="data/copy-d.png")
+    copy_light = PhotoImage(file="data/copy-l.png")
 
     copy_button_1 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_1)
     copy_button_1.place(x=820, y=330)

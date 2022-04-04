@@ -1,4 +1,4 @@
-from tkinter import *  # GUI
+from tkinter import * # GUI
 import tkinter.ttk as ttk  # Themes
 from gtts import gTTS  # Google text to speech
 from deep_translator import GoogleTranslator  # Google Translator
@@ -237,7 +237,7 @@ def help_option():
     help_win.geometry("400x400")  # Set the size
     help_win.title("Help")  # Set the title
     help_win.resizable(False, False)  # Disable resizing
-    help_win.tk.call("source", "azure.tcl")
+    help_win.tk.call("source", "data/azure.tcl")
     help_win.tk.call("set_theme", "dark")
 
     instructions = Label(help_win, text="Instructions", font=('Helvetica', 20))
@@ -251,13 +251,13 @@ window.resizable(False, False)  # Disable resizing
 
 # Dark/Light mode toggle
 dark_mode = True
-on = PhotoImage(file="dark.png")
-off = PhotoImage(file="light.png")
+on = PhotoImage(file="data/dark.png")
+off = PhotoImage(file="data/light.png")
 onButton = Button(window, image=on, bd=0, cursor="hand2", command=switch)
 onButton.place(x=630, y=25)
 
 # Default theme
-window.tk.call("source", "azure.tcl")
+window.tk.call("source", "data/azure.tcl")
 window.tk.call("set_theme", "dark")
 
 # Title
@@ -293,21 +293,21 @@ clear = ttk.Button(window, text="Clear", cursor="hand2", style="Accent.TButton",
 clear.place(x=350, y=450)
 
 # copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
-copy_dark = PhotoImage(file="copy-d.png")
-copy_light = PhotoImage(file="copy-l.png")
+copy_dark = PhotoImage(file="data/copy-d.png")
+copy_light = PhotoImage(file="data/copy-l.png")
 
 copy = Button(window, image=copy_dark, bd=0, cursor="hand2", command=copy)
 copy.place(x=335, y=350)
 
-history_dark = PhotoImage(file="history-d.png")
-history_light = PhotoImage(file="history-l.png")
+history_dark = PhotoImage(file="data/history-d.png")
+history_light = PhotoImage(file="data/history-l.png")
 
 history = Button(window, image=history_dark, bd=0, cursor="hand2", command=history_window)
 history.place(x=335, y=250)
 
-mic_dark = PhotoImage(file="mic-d.png")
-mic_light = PhotoImage(file="mic-l.png")
-mic_enable = PhotoImage(file="mic-green.png")
+mic_dark = PhotoImage(file="data/mic-d.png")
+mic_light = PhotoImage(file="data/mic-l.png")
+mic_enable = PhotoImage(file="data/mic-green.png")
 
 mic_value = False
 mic_button = Button(window, image=mic_dark, bd=0, cursor="hand2", command=listen)
@@ -328,7 +328,7 @@ def create_history_window():
     history_win.geometry("1000x400")  # Set the size
     history_win.title("Translation History")  # Set the title
     history_win.resizable(False, False)  # Disable resizing
-    history_win.tk.call("source", "azure.tcl")
+    history_win.tk.call("source", "data/azure.tcl")
     history_win.tk.call("set_theme", "dark")
 
     def query_database():
@@ -425,8 +425,8 @@ def create_history_window():
         history_win.clipboard_append(translation_box.get())
         history_win.update()
 
-    copy_dark = PhotoImage(master=history_win, file="copy-d.png")
-    copy_light = PhotoImage(master=history_win, file="copy-l.png")
+    copy_dark = PhotoImage(master=history_win, file="data/copy-d.png")
+    copy_light = PhotoImage(master=history_win, file="data/copy-l.png")
 
     copy_button_1 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_1)
     copy_button_1.place(x=820, y=330)
