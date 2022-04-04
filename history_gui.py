@@ -197,3 +197,5 @@ def create_history_window():
     history_win.mainloop()
 
 create_history_window()
+
+create_history_window()

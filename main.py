@@ -319,6 +319,7 @@ d_l_buttons = 0
 
 
 def create_history_window():
+    global d_l_buttons
     history_win = Tk()  # Create the window
     history_win.geometry("1000x400")  # Set the size
     history_win.title("Translation History")  # Set the title
@@ -420,6 +421,25 @@ def create_history_window():
         history_win.clipboard_append(translation_box.get())
         history_win.update()
 
+    copy_dark = PhotoImage(master=history_win, file="copy-d.png")
+    copy_light = PhotoImage(master=history_win, file="copy-l.png")
+
+    copy_button_1 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_1)
+    copy_button_1.place(x=820, y=330)
+    # Make these copy buttons change form light/dark once linked with main py
+    copy_button_2 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_2)
+    copy_button_2.place(x=820, y=365)
+
+    if d_l_buttons == 1:
+        history_win.tk.call("set_theme", "light")
+        copy_button_1.config(image=copy_light)
+        copy_button_2.config(image=copy_light)
+    else:
+        history_win.tk.call("set_theme", "dark")
+        copy_button_1.config(image=copy_dark)
+        copy_button_2.config(image=copy_dark)
+
+
     # Treeview
     tree_frame = ttk.Frame(history_win)
     tree_frame.pack(pady=10)
@@ -489,14 +509,7 @@ def create_history_window():
                               command=clear_history)
     clear_button.place(x=500, y=290)
 
-    copy_dark = PhotoImage(master=history_win, file="copy-d.png")
-    copy_light = PhotoImage(master=history_win, file="copy-l.png")
 
-    copy_button_1 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_1)
-    copy_button_1.place(x=820, y=330)
-    # Make these copy buttons change form light/dark once linked with main py
-    copy_button_2 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_2)
-    copy_button_2.place(x=820, y=365)
 
     # Add History to treeview
     query_database()
