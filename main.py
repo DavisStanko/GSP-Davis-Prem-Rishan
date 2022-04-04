@@ -6,22 +6,6 @@ import playsound  # Play speech
 import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
 
-# Python program get current working directory using os.getcwd()
-# import history_gui
-
-'''# importing os module
-import os
-# Get the current directory path
-current_directory = os.getcwd()
-# Print the current working directory
-print("Current working directory:", current_directory)
-# Get the script path and the file name
-foldername = os.path.basename(current_directory)
-
-scriptpath = os.path.realpath(__file__)
-# Print the script file absolute path
-print("Script file path is : " + scriptpath)'''
-
 start_value = 0
 
 
@@ -29,18 +13,9 @@ def startup():
     global rg
     rg = None
 
-    if start_value == 0:
-        from module_switch import ImportBlocker
-        import sys
-
-        sys.meta_path = [ImportBlocker('speech_recog')]
-
-    elif start_value == 1:
+    if start_value == 1:
         from speech_recog import Recognizer
         rg = Recognizer()
-
-    elif start_value == 2:
-        create_history_window()
 
 
 # Google translate language codes and language names
@@ -201,10 +176,7 @@ def submit_Button():
 
 # kinda works
 def history_window():
-    global start_value
-    # exec(open("./history_gui.py").read())
-    start_value = 2
-    startup()
+    create_history_window()
 
 
 def enable_speech():
@@ -238,6 +210,18 @@ def mic_enabled():
         mic_button.config(image=mic_enable)
     else:
         pass
+
+
+def help_option():
+    help_win = Tk()  # Create the window
+    help_win.geometry("400x400")  # Set the size
+    help_win.title("Help")  # Set the title
+    help_win.resizable(False, False)  # Disable resizing
+    help_win.tk.call("source", "azure.tcl")
+    help_win.tk.call("set_theme", "dark")
+
+    instructions = Label(help_win, text="Instructions", font=('Helvetica', 20))
+    instructions.pack(side=TOP, anchor=NW, padx=10, pady=10)
 
 
 window = Tk()  # Create the window
@@ -288,7 +272,6 @@ result.place(x=375, y=153)
 clear = ttk.Button(window, text="Clear", cursor="hand2", style="Accent.TButton", command=clear)
 clear.place(x=350, y=450)
 
-# copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
 copy_dark = PhotoImage(file="copy-d.png")
 copy_light = PhotoImage(file="copy-l.png")
 
@@ -314,6 +297,7 @@ window.config(menu=upper_menu)
 options_menu = Menu(upper_menu)
 upper_menu.add_cascade(label="Options", menu=options_menu)
 options_menu.add_command(label="Enable Speech", command=enable_speech)
+options_menu.add_command(label="Help", command=help_option)
 
 d_l_buttons = 0
 
