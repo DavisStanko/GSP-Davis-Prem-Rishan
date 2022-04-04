@@ -7,7 +7,7 @@ import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
 
 # Python program get current working directory using os.getcwd()
-import history_gui
+# import history_gui
 
 '''# importing os module
 import os
@@ -21,8 +21,6 @@ foldername = os.path.basename(current_directory)
 scriptpath = os.path.realpath(__file__)
 # Print the script file absolute path
 print("Script file path is : " + scriptpath)'''
-
-
 
 start_value = 0
 
@@ -43,8 +41,6 @@ def startup():
 
     elif start_value == 2:
         create_history_window()
-
-
 
 
 # Google translate language codes and language names
@@ -493,8 +489,8 @@ def create_history_window():
                               command=clear_history)
     clear_button.place(x=500, y=290)
 
-    copy_dark = PhotoImage(file="copy-d.png")
-    copy_light = PhotoImage(file="copy-l.png")
+    copy_dark = PhotoImage(master=history_win, file="copy-d.png")
+    copy_light = PhotoImage(master=history_win, file="copy-l.png")
 
     copy_button_1 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_1)
     copy_button_1.place(x=820, y=330)

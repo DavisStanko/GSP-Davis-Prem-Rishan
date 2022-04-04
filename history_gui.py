@@ -195,3 +195,5 @@ def create_history_window():
     translation_box.bind("<1>", lambda e: translation_box.focus_set())
 
     history_win.mainloop()
+
+create_history_window()
