@@ -1,10 +1,26 @@
-from tkinter import *  # GUI
+from tkinter import * # GUI
 import tkinter.ttk as ttk  # Themes
 from gtts import gTTS  # Google text to speech
 from deep_translator import GoogleTranslator  # Google Translator
 import playsound  # Play speech
 import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
+
+# Python program get current working directory using os.getcwd()
+# import history_gui
+
+'''# importing os module
+import os
+# Get the current directory path
+current_directory = os.getcwd()
+# Print the current working directory
+print("Current working directory:", current_directory)
+# Get the script path and the file name
+foldername = os.path.basename(current_directory)
+
+scriptpath = os.path.realpath(__file__)
+# Print the script file absolute path
+print("Script file path is : " + scriptpath)'''
 
 start_value = 0
 
@@ -16,6 +32,7 @@ def startup():
     if start_value == 1:
         from speech_recog import Recognizer
         rg = Recognizer()
+        
 
 
 # Google translate language codes and language names
@@ -176,7 +193,10 @@ def submit_Button():
 
 # kinda works
 def history_window():
-    create_history_window()
+    global start_value
+    # exec(open("./history_gui.py").read())
+    start_value = 2
+    startup()
 
 
 def enable_speech():
@@ -211,18 +231,18 @@ def mic_enabled():
     else:
         pass
 
-
+    
 def help_option():
     help_win = Tk()  # Create the window
     help_win.geometry("400x400")  # Set the size
     help_win.title("Help")  # Set the title
     help_win.resizable(False, False)  # Disable resizing
-    help_win.tk.call("source", "azure.tcl")
+    help_win.tk.call("source", "data/azure.tcl")
     help_win.tk.call("set_theme", "dark")
 
     instructions = Label(help_win, text="Instructions", font=('Helvetica', 20))
     instructions.pack(side=TOP, anchor=NW, padx=10, pady=10)
-
+    
 
 window = Tk()  # Create the window
 window.geometry("700x500")  # Set the size
@@ -231,13 +251,13 @@ window.resizable(False, False)  # Disable resizing
 
 # Dark/Light mode toggle
 dark_mode = True
-on = PhotoImage(file="dark.png")
-off = PhotoImage(file="light.png")
+on = PhotoImage(file="data/dark.png")
+off = PhotoImage(file="data/light.png")
 onButton = Button(window, image=on, bd=0, cursor="hand2", command=switch)
 onButton.place(x=630, y=25)
 
 # Default theme
-window.tk.call("source", "azure.tcl")
+window.tk.call("source", "data/azure.tcl")
 window.tk.call("set_theme", "dark")
 
 # Title
@@ -272,21 +292,22 @@ result.place(x=375, y=153)
 clear = ttk.Button(window, text="Clear", cursor="hand2", style="Accent.TButton", command=clear)
 clear.place(x=350, y=450)
 
-copy_dark = PhotoImage(file="copy-d.png")
-copy_light = PhotoImage(file="copy-l.png")
+# copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
+copy_dark = PhotoImage(file="data/copy-d.png")
+copy_light = PhotoImage(file="data/copy-l.png")
 
 copy = Button(window, image=copy_dark, bd=0, cursor="hand2", command=copy)
 copy.place(x=335, y=350)
 
-history_dark = PhotoImage(file="history-d.png")
-history_light = PhotoImage(file="history-l.png")
+history_dark = PhotoImage(file="data/history-d.png")
+history_light = PhotoImage(file="data/history-l.png")
 
 history = Button(window, image=history_dark, bd=0, cursor="hand2", command=history_window)
 history.place(x=335, y=250)
 
-mic_dark = PhotoImage(file="mic-d.png")
-mic_light = PhotoImage(file="mic-l.png")
-mic_enable = PhotoImage(file="mic-green.png")
+mic_dark = PhotoImage(file="data/mic-d.png")
+mic_light = PhotoImage(file="data/mic-l.png")
+mic_enable = PhotoImage(file="data/mic-green.png")
 
 mic_value = False
 mic_button = Button(window, image=mic_dark, bd=0, cursor="hand2", command=listen)
@@ -297,17 +318,17 @@ window.config(menu=upper_menu)
 options_menu = Menu(upper_menu)
 upper_menu.add_cascade(label="Options", menu=options_menu)
 options_menu.add_command(label="Enable Speech", command=enable_speech)
-options_menu.add_command(label="Help", command=help_option)
 
 d_l_buttons = 0
 
 
 def create_history_window():
+    global d_l_buttons
     history_win = Tk()  # Create the window
     history_win.geometry("1000x400")  # Set the size
     history_win.title("Translation History")  # Set the title
     history_win.resizable(False, False)  # Disable resizing
-    history_win.tk.call("source", "azure.tcl")
+    history_win.tk.call("source", "data/azure.tcl")
     history_win.tk.call("set_theme", "dark")
 
     def query_database():
@@ -404,6 +425,25 @@ def create_history_window():
         history_win.clipboard_append(translation_box.get())
         history_win.update()
 
+    copy_dark = PhotoImage(master=history_win, file="data/copy-d.png")
+    copy_light = PhotoImage(master=history_win, file="data/copy-l.png")
+
+    copy_button_1 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_1)
+    copy_button_1.place(x=820, y=330)
+    # Make these copy buttons change form light/dark once linked with main py
+    copy_button_2 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_2)
+    copy_button_2.place(x=820, y=365)
+
+    if d_l_buttons == 1:
+        history_win.tk.call("set_theme", "light")
+        copy_button_1.config(image=copy_light)
+        copy_button_2.config(image=copy_light)
+    else:
+        history_win.tk.call("set_theme", "dark")
+        copy_button_1.config(image=copy_dark)
+        copy_button_2.config(image=copy_dark)
+
+
     # Treeview
     tree_frame = ttk.Frame(history_win)
     tree_frame.pack(pady=10)
@@ -473,14 +513,7 @@ def create_history_window():
                               command=clear_history)
     clear_button.place(x=500, y=290)
 
-    copy_dark = PhotoImage(master=history_win, file="copy-d.png")
-    copy_light = PhotoImage(master=history_win, file="copy-l.png")
 
-    copy_button_1 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_1)
-    copy_button_1.place(x=820, y=330)
-    # Make these copy buttons change form light/dark once linked with main py
-    copy_button_2 = Button(history_win, image=copy_dark, bd=0, cursor="hand2", command=copy_2)
-    copy_button_2.place(x=820, y=365)
 
     # Add History to treeview
     query_database()
