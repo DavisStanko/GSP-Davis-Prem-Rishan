@@ -1,4 +1,4 @@
-from tkinter import * # GUI
+from tkinter import *  # GUI
 import tkinter.ttk as ttk  # Themes
 from gtts import gTTS  # Google text to speech
 from deep_translator import GoogleTranslator  # Google Translator
@@ -32,7 +32,6 @@ def startup():
     if start_value == 1:
         from speech_recog import Recognizer
         rg = Recognizer()
-        
 
 
 # Google translate language codes and language names
@@ -191,12 +190,8 @@ def submit_Button():
         pass
 
 
-# kinda works
 def history_window():
-    global start_value
-    # exec(open("./history_gui.py").read())
-    start_value = 2
-    startup()
+    create_history_window()
 
 
 def enable_speech():
@@ -231,7 +226,7 @@ def mic_enabled():
     else:
         pass
 
-    
+
 def help_option():
     help_win = Tk()  # Create the window
     help_win.geometry("400x400")  # Set the size
@@ -242,7 +237,7 @@ def help_option():
 
     instructions = Label(help_win, text="Instructions", font=('Helvetica', 20))
     instructions.pack(side=TOP, anchor=NW, padx=10, pady=10)
-    
+
 
 window = Tk()  # Create the window
 window.geometry("700x500")  # Set the size
@@ -443,7 +438,6 @@ def create_history_window():
         copy_button_1.config(image=copy_dark)
         copy_button_2.config(image=copy_dark)
 
-
     # Treeview
     tree_frame = ttk.Frame(history_win)
     tree_frame.pack(pady=10)
@@ -512,8 +506,6 @@ def create_history_window():
     clear_button = ttk.Button(history_win, text="Clear History", cursor="hand2", style="Accent.TButton",
                               command=clear_history)
     clear_button.place(x=500, y=290)
-
-
 
     # Add History to treeview
     query_database()
