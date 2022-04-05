@@ -6,34 +6,6 @@ import playsound  # Play speech
 import sqlite3  # Storing past translations
 import datetime  # Getting date of translation
 
-# Python program get current working directory using os.getcwd()
-# import history_gui
-
-'''# importing os module
-import os
-# Get the current directory path
-current_directory = os.getcwd()
-# Print the current working directory
-print("Current working directory:", current_directory)
-# Get the script path and the file name
-foldername = os.path.basename(current_directory)
-
-scriptpath = os.path.realpath(__file__)
-# Print the script file absolute path
-print("Script file path is : " + scriptpath)'''
-
-start_value = 0
-
-
-def startup():
-    global rg
-    rg = None
-
-    if start_value == 1:
-        from speech_recog import Recognizer
-        rg = Recognizer()
-
-
 # Google translate language codes and language names
 choose_langauge = {"af": "Afrikaans", "sq": "Albanian", "am": "Amharic", "ar": "Arabic", "hy": "Armenian",
                    "az": "Azerbaijani", "eu": "Basque", "be": "Belarusian", "bn": "Bengali", "bs": "Bosnian",
@@ -59,8 +31,18 @@ choose_langauge = {"af": "Afrikaans", "sq": "Albanian", "am": "Amharic", "ar": "
 
 d_l_buttons = 0
 
-
 ##################################
+
+start_value = 0
+
+
+def startup():
+    global rg
+    rg = None
+
+    if start_value == 1:
+        from speech_recog import Recognizer
+        rg = Recognizer()
 
 
 def create_product_table_UI():
@@ -202,10 +184,12 @@ def enable_speech():
 
 
 def listen():
-    global start_value
+    global start_value, mic_value
+    mic_value = True
+    mic_enabled()
+
     start_value = 1
     startup()
-    mic_value = True
 
     entry.delete(1.0, "end")
     result.config(text="")
@@ -220,7 +204,6 @@ def listen():
 def mic_enabled():
     global mic_value
 
-    mic_value = True
     if mic_value:
         mic_button.config(image=mic_enable)
     else:
@@ -229,15 +212,41 @@ def mic_enabled():
 
 def help_option():
     help_win = Tk()  # Create the window
-    help_win.geometry("400x400")  # Set the size
+    help_win.geometry("430x400")  # Set the size
     help_win.title("Help")  # Set the title
     help_win.resizable(False, False)  # Disable resizing
     help_win.tk.call("source", "data/azure.tcl")
     help_win.tk.call("set_theme", "dark")
 
-    instructions = Label(help_win, text="Instructions", font=('Helvetica', 20))
+    main_frame = Frame(help_win)
+    main_frame.pack(fill=BOTH, expand=1)
+
+    my_canvas = Canvas(main_frame)
+    my_canvas.pack(side=LEFT, fill=BOTH, expand=1)
+
+    help_scrollbar = ttk.Scrollbar(main_frame, orient=VERTICAL, command=my_canvas.yview)
+    help_scrollbar.pack(side=RIGHT, fill=Y)
+
+    my_canvas.configure(yscrollcommand=help_scrollbar.set)
+    my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
+
+    second_frame = Frame(my_canvas)
+
+    my_canvas.create_window((0, 0), window=second_frame, anchor=NW)
+
+    instructions = Label(second_frame, text="Instructions", font=('Helvetica', 24, "underline"))
     instructions.pack(side=TOP, anchor=NW, padx=10, pady=10)
 
+    instruct_text = "‣  Input the text to be translated in the designated field.\n" \
+                    '   ‣   The language will be detected automatically.\n' \
+                    '\n‣    Select the output language from the drop down menu.\n' \
+                    '\n‣    Click the submit button when ready.\n'
+
+    instruct_cont = Label(second_frame, text=instruct_text, font=('Helvetica', 16), justify=LEFT, wraplength=385)
+    instruct_cont.pack(anchor=W, padx=10)
+
+
+##################################
 
 window = Tk()  # Create the window
 window.geometry("700x500")  # Set the size
@@ -257,7 +266,7 @@ window.tk.call("set_theme", "dark")
 
 # Title
 labelTittle = ttk.Label(window, text="Translator",
-                        font=("Helvetica", 32, "underline"))
+                        font=("Apple", 32, "bold"), borderwidth=10, relief=GROOVE, background="#2c73e6")
 labelTittle.place(x=260, y=25)
 
 entryValue = StringVar()
@@ -287,7 +296,6 @@ result.place(x=375, y=153)
 clear = ttk.Button(window, text="Clear", cursor="hand2", style="Accent.TButton", command=clear)
 clear.place(x=350, y=450)
 
-# copy/paste https://stackoverflow.com/questions/36990396/automatically-copy-tkinter-text-widget-content-to-clipboard
 copy_dark = PhotoImage(file="data/copy-d.png")
 copy_light = PhotoImage(file="data/copy-l.png")
 
@@ -313,8 +321,7 @@ window.config(menu=upper_menu)
 options_menu = Menu(upper_menu)
 upper_menu.add_cascade(label="Options", menu=options_menu)
 options_menu.add_command(label="Enable Speech", command=enable_speech)
-
-d_l_buttons = 0
+options_menu.add_command(label="Help", command=help_option)
 
 
 def create_history_window():
