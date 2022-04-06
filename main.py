@@ -248,7 +248,6 @@ def help_option():
     else:
         help_win.tk.call("set_theme", "dark")
 
-
     main_frame = ttk.Frame(help_win)
     main_frame.pack(fill=BOTH, expand=1)
 
@@ -276,8 +275,8 @@ def help_option():
     instruct_cont = ttk.Label(second_frame, text=instruct_text, font=('Apple', 16), justify=LEFT, wraplength=385)
     instruct_cont.pack(anchor=W, padx=10)
 
-    speech_label = ttk.Label(second_frame, text="How to Use Speech-to-Text", font=('Apple', 24, "underline"))
-    speech_label.pack(side=TOP, anchor=NW, padx=10, pady=10)
+    mic_tutorial_label = ttk.Label(second_frame, text="Using Speech-to-Text", font=('Apple', 24, "underline"))
+    mic_tutorial_label.pack(side=TOP, anchor=NW, padx=10, pady=10)
 
     instruct2_text = "‣  Options > Enable Mic\n" \
                      '\n‣  The mic image will appear in the center of the program.\n' \
@@ -286,6 +285,17 @@ def help_option():
 
     instruct2_cont = ttk.Label(second_frame, text=instruct2_text, font=('Apple', 16), justify=LEFT, wraplength=385)
     instruct2_cont.pack(anchor=W, padx=10)
+
+    speech_label = ttk.Label(second_frame, text="Enabling Text-to-Speech", font=('Apple', 24, "underline"))
+    speech_label.pack(side=TOP, anchor=NW, padx=10, pady=10)
+
+    instruct3_text = "‣  Options > Enable Speech\n" \
+                     '\n   ‣  A checkmark will appear next to Enable Speech when activated\n' \
+                     '\n‣  Submit translation.\n' \
+                     '\n‣  The program will automatically speak the translated text.\n' \
+
+    instruct3_cont = ttk.Label(second_frame, text=instruct3_text, font=('Apple', 16), justify=LEFT, wraplength=385)
+    instruct3_cont.pack(anchor=W, padx=10)
 
 
 ##################################
