@@ -95,7 +95,7 @@ def insert_data(values):
 
 def get_info():
     input_get = entry.get("1.0", "end-1c")
-    translatedResult = result["text"]
+    translated_result = result["text"]
     lang = option_variable.get()
     current_date_time = (datetime.datetime.now())
     date = current_date_time.strftime("%Y-%m-%d")
@@ -103,7 +103,7 @@ def get_info():
     if len(input_get) == 0:
         return
     else:
-        values = (input_get, translatedResult, lang, date)
+        values = (input_get, translated_result, lang, date)
         insert_data(values)
 
 
@@ -133,6 +133,7 @@ def submit():  # Translate and display the text
             pass
     else:
         pass
+
 
 def clear():  # Clear both text boxes
     entry.delete(1.0, "end")
@@ -213,6 +214,23 @@ def mic_enabled():
         mic_button.config(image=mic_enable)
     else:
         pass
+
+
+# Menu
+def speaking_enable():
+    global speaking_txt
+    speaking_txt = 1
+
+    options_menu.delete("Enable Speech")
+    options_menu.add_command(label="Enable Speech ✓", command=speaking_disable)
+
+
+def speaking_disable():
+    global speaking_txt
+    speaking_txt = 0
+
+    options_menu.delete("Enable Speech ✓")
+    options_menu.add_command(label="Enable Speech", command=speaking_enable)
 
 
 def help_option():
@@ -339,26 +357,13 @@ mic_enable = PhotoImage(file="data/mic-green.png")
 mic_value = False
 mic_button = Button(window, image=mic_dark, bd=0, cursor="hand2", command=listen)
 
-# Menu
-
-def speaking_enable():
-    global speaking_txt
-    speaking_txt = 1
-
-def speaking_disable():
-    global speaking_txt
-    speaking_txt = 0
-
 upper_menu = Menu(window)
 window.config(menu=upper_menu)
 options_menu = Menu(upper_menu)
 upper_menu.add_cascade(label="Options", menu=options_menu)
 options_menu.add_command(label="Enable Mic", command=enable_mic)
 options_menu.add_command(label="Enable Speech", command=speaking_enable)
-options_menu.add_command(label="Disable Speech", command=speaking_disable)
 options_menu.add_command(label="Help", command=help_option)
-
-
 
 
 def create_history_window():
