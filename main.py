@@ -95,7 +95,7 @@ def insert_data(values):
 
 def get_info():
     input_get = entry.get("1.0", "end-1c")
-    translatedResult = result["text"]
+    translated_result = result["text"]
     lang = option_variable.get()
     current_date_time = (datetime.datetime.now())
     date = current_date_time.strftime("%Y-%m-%d")
@@ -103,7 +103,7 @@ def get_info():
     if len(input_get) == 0:
         return
     else:
-        values = (input_get, translatedResult, lang, date)
+        values = (input_get, translated_result, lang, date)
         insert_data(values)
 
 
