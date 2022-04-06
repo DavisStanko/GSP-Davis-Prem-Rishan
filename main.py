@@ -239,16 +239,27 @@ def help_option():
 
     my_canvas.create_window((0, 0), window=second_frame, anchor=NW)
 
-    instructions = Label(second_frame, text="Instructions", font=('Helvetica', 24, "underline"))
+    instructions = Label(second_frame, text="Instructions", font=('Apple', 24, "underline"))
     instructions.pack(side=TOP, anchor=NW, padx=10, pady=10)
 
     instruct_text = "‣  Input the text to be translated in the designated field.\n" \
-                    '   ‣   The language will be detected automatically.\n' \
-                    '\n‣    Select the output language from the drop down menu.\n' \
-                    '\n‣    Click the submit button when ready.\n'
+                    '\n   ‣  The language will be detected automatically.\n' \
+                    '\n‣  Select the output language from the drop down menu.\n' \
+                    '\n‣  Click the submit button when ready.\n'
 
-    instruct_cont = Label(second_frame, text=instruct_text, font=('Helvetica', 16), justify=LEFT, wraplength=385)
+    instruct_cont = Label(second_frame, text=instruct_text, font=('Apple', 16), justify=LEFT, wraplength=385)
     instruct_cont.pack(anchor=W, padx=10)
+
+    speech_label = Label(second_frame, text="How to Use Speech-to-Text", font=('Apple', 24, "underline"))
+    speech_label.pack(side=TOP, anchor=NW, padx=10, pady=10)
+
+    instruct2_text = "‣  Options > Enable Mic\n" \
+                     '\n‣  The mic image will appear in the center of the program.\n' \
+                     '\n‣  Hit the button and speak clearly.\n' \
+                     '\n   ‣  The mic will turn green to show it is working.\n'
+
+    instruct2_cont = Label(second_frame, text=instruct2_text, font=('Apple', 16), justify=LEFT, wraplength=385)
+    instruct2_cont.pack(anchor=W, padx=10)
 
 
 ##################################
