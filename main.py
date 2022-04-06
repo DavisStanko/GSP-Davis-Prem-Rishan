@@ -35,6 +35,8 @@ d_l_buttons = 0
 
 start_value = 0
 
+speaking_txt = 0
+
 
 def startup():
     global rg
@@ -112,22 +114,25 @@ def get_key(val):  # Get key from value
 
 
 def submit():  # Translate and display the text
+    global speaking_txt
     lang = get_key(option_variable.get())  # Get the output language
     ttk.output = GoogleTranslator(source="auto", target=lang).translate(entry.get(1.0, "end"))  # Translate the text
     result.config(text=ttk.output)
-    try:
-        # Passing the text and language, speed, and accent to gtts
-        myobj = gTTS(text=ttk.output, slow=False, lang=lang)
-        myobj.save("speech.mp3")  # Saving the converted audio in a mp3 file
-        playsound.playsound("speech.mp3", True)  # Playing the converted file
-    except ValueError:
-        # Passing the text and language, speed, and accent to gtts
-        myobj = gTTS(text=ttk.output, slow=False, lang="en")
-        myobj.save("speech.mp3")  # Saving the converted audio in a mp3 file
-        playsound.playsound("speech.mp3", True)  # Playing the converted file
-    except AssertionError:
+    if speaking_txt == 1:
+        try:
+            # Passing the text and language, speed, and accent to gtts
+            myobj = gTTS(text=ttk.output, slow=False, lang=lang)
+            myobj.save("speech.mp3")  # Saving the converted audio in a mp3 file
+            playsound.playsound("speech.mp3", True)  # Playing the converted file
+        except ValueError:
+            # Passing the text and language, speed, and accent to gtts
+            myobj = gTTS(text=ttk.output, slow=False, lang="en")
+            myobj.save("speech.mp3")  # Saving the converted audio in a mp3 file
+            playsound.playsound("speech.mp3", True)  # Playing the converted file
+        except AssertionError:
+            pass
+    else:
         pass
-
 
 def clear():  # Clear both text boxes
     entry.delete(1.0, "end")
@@ -316,17 +321,30 @@ mic_value = False
 mic_button = Button(window, image=mic_dark, bd=0, cursor="hand2", command=listen)
 
 # Menu
+
+def speaking_enable():
+    global speaking_txt
+    speaking_txt = 1
+
+def speaking_disable():
+    global speaking_txt
+    speaking_txt = 0
+
 upper_menu = Menu(window)
 window.config(menu=upper_menu)
 options_menu = Menu(upper_menu)
 upper_menu.add_cascade(label="Options", menu=options_menu)
 options_menu.add_command(label="Enable Mic", command=enable_mic)
-options_menu.add_command(label="Enable Speech", command="")
+options_menu.add_command(label="Enable Speech", command=speaking_enable)
+options_menu.add_command(label="Disable Speech", command=speaking_disable)
 options_menu.add_command(label="Help", command=help_option)
+
+
 
 
 def create_history_window():
     global d_l_buttons
+
     history_win = Tk()  # Create the window
     history_win.geometry("1000x400")  # Set the size
     history_win.title("Translation History")  # Set the title
