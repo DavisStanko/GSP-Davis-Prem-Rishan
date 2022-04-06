@@ -176,7 +176,7 @@ def history_window():
     create_history_window()
 
 
-def enable_speech():
+def enable_mic():
     global start_value
 
     start_value = 1
@@ -320,7 +320,8 @@ upper_menu = Menu(window)
 window.config(menu=upper_menu)
 options_menu = Menu(upper_menu)
 upper_menu.add_cascade(label="Options", menu=options_menu)
-options_menu.add_command(label="Enable Speech", command=enable_speech)
+options_menu.add_command(label="Enable Mic", command=enable_mic)
+options_menu.add_command(label="Enable Speech", command="")
 options_menu.add_command(label="Help", command=help_option)
 
 
