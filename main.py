@@ -227,7 +227,6 @@ def help_option():
 
     if d_l_buttons == 1:
         help_win.tk.call("set_theme", "light")
-
     else:
         help_win.tk.call("set_theme", "dark")
 
