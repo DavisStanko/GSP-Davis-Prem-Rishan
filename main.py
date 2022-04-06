@@ -216,6 +216,8 @@ def mic_enabled():
 
 
 def help_option():
+    global d_l_buttons
+
     help_win = Tk()  # Create the window
     help_win.geometry("430x400")  # Set the size
     help_win.title("Help")  # Set the title
@@ -223,7 +225,14 @@ def help_option():
     help_win.tk.call("source", "data/azure.tcl")
     help_win.tk.call("set_theme", "dark")
 
-    main_frame = Frame(help_win)
+    if d_l_buttons == 1:
+        help_win.tk.call("set_theme", "light")
+
+    else:
+        help_win.tk.call("set_theme", "dark")
+
+
+    main_frame = ttk.Frame(help_win)
     main_frame.pack(fill=BOTH, expand=1)
 
     my_canvas = Canvas(main_frame)
@@ -235,11 +244,11 @@ def help_option():
     my_canvas.configure(yscrollcommand=help_scrollbar.set)
     my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
 
-    second_frame = Frame(my_canvas)
+    second_frame = ttk.Frame(my_canvas)
 
     my_canvas.create_window((0, 0), window=second_frame, anchor=NW)
 
-    instructions = Label(second_frame, text="Instructions", font=('Apple', 24, "underline"))
+    instructions = ttk.Label(second_frame, text="Instructions", font=('Apple', 24, "underline"))
     instructions.pack(side=TOP, anchor=NW, padx=10, pady=10)
 
     instruct_text = "‣  Input the text to be translated in the designated field.\n" \
@@ -247,10 +256,10 @@ def help_option():
                     '\n‣  Select the output language from the drop down menu.\n' \
                     '\n‣  Click the submit button when ready.\n'
 
-    instruct_cont = Label(second_frame, text=instruct_text, font=('Apple', 16), justify=LEFT, wraplength=385)
+    instruct_cont = ttk.Label(second_frame, text=instruct_text, font=('Apple', 16), justify=LEFT, wraplength=385)
     instruct_cont.pack(anchor=W, padx=10)
 
-    speech_label = Label(second_frame, text="How to Use Speech-to-Text", font=('Apple', 24, "underline"))
+    speech_label = ttk.Label(second_frame, text="How to Use Speech-to-Text", font=('Apple', 24, "underline"))
     speech_label.pack(side=TOP, anchor=NW, padx=10, pady=10)
 
     instruct2_text = "‣  Options > Enable Mic\n" \
@@ -258,7 +267,7 @@ def help_option():
                      '\n‣  Hit the button and speak clearly.\n' \
                      '\n   ‣  The mic will turn green to show it is working.\n'
 
-    instruct2_cont = Label(second_frame, text=instruct2_text, font=('Apple', 16), justify=LEFT, wraplength=385)
+    instruct2_cont = ttk.Label(second_frame, text=instruct2_text, font=('Apple', 16), justify=LEFT, wraplength=385)
     instruct2_cont.pack(anchor=W, padx=10)
 
 
