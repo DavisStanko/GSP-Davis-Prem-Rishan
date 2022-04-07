@@ -34,7 +34,11 @@ Every contributor has had input and has contributed to every aspect of the progr
     - If language has no pairing accent, use english accent
 - Frontend
   - GUI skeleton
-  - SQL Treeview
+  - History
+    - SQL Treeview
+  - Main menu
+    - Options with functions
+    - Help window
 - Documentation
   - Updates
     - Schedule + Testing

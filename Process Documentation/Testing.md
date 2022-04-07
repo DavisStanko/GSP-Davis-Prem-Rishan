@@ -20,3 +20,4 @@
   - Paste method successfully pastes recognizable audio to entry box
 - Import module switch ignores speech_recog.py
   - Turn on switch using "Enable Speech"
+- Scrollbar in help window
