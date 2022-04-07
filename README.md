@@ -4,8 +4,13 @@ This program was made to translate text to and from languages of your choosing.
 
 ## Getting Started
 
+## Installation
+
+If you're using linux then you can navigate to the releases section to download the latest release. The binary is not compatible and as such will not work on non-GNU/Linux operating systems. [Learn why here!](https://realpython.com/pyinstaller-python/#limitations)
+
 ### Prerequisites
 
+If you are not using the binary and would like to run the program manually, please follow the instructions below.
 Please be sure to install the following before running the program.
 
 - Python 3.x
