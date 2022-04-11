@@ -49,14 +49,10 @@ def create_table():
             response = input("The table {0} already exists, do you wish to recreate it? (y/n): ".format(table_name))
             if response == "y":
                 keep_table = False
-                print("The {0} table will be recreated - all existing data will be lost.".format(table_name))
                 cursor.execute("drop table if exists {0}".format(table_name))
                 db.commit()
-            else:
-                print("The existing table was kept.")
         else:
             keep_table = False
-            print("A new table was created.")
 
         # create the table if required (not keeping old one)
         if not keep_table:
