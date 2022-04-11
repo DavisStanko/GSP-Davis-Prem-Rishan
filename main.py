@@ -192,8 +192,6 @@ def mic_enabled():
 
     if mic_value:
         mic_button.config(image=mic_enable)
-    else:
-        pass
 
 
 # Menu
