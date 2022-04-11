@@ -2,10 +2,10 @@
 
 Naming with Python/Snake case
 
-Functional Programming
+Functional Programming (OOP for speech input)
 
 Double quotes
 
-Tab to indent instead of spaces
+Tab to indent
 
 AutoPep8 formatting
