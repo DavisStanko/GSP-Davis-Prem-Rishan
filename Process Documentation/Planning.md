@@ -31,4 +31,6 @@
 ### History button
 
 - View sql database of all previous translations
-  - This is going to be a while new window
+  - This is going to be a whole new window
+
+### Help window
