@@ -2,6 +2,10 @@
 
 Prem is away Feb 17-21 inclusive.
 
+## ToDo
+
+**If something is proving to be difficult or must be left until later put it below in bold (two \* on either side). Once it is finished remove the bold.**
+
 Davis' code works but a GUI is needed
 
 - GUI implemented
@@ -45,3 +49,5 @@ Move history_hui to main
 selecting translated text
 
 wrapping text to fit
+
+Record Linux EXE working and upload to releases
