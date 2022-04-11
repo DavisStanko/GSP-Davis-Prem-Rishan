@@ -2,22 +2,28 @@
 
 ## Checks
 
-- GUI displays
-- Input received
-  - Typing input
-  - Speech input
-- Input translated
-- Speech file written
-- Text displayed
-  - Input and output
+- **GUI displays**
+  - Dark mode/ Light mode
+    - Also affects child windows
+- Options
+  - Speech output
+  - Turn on switch using "Enable Speech"
+  - Help menu displays
+    - Scrollbar works
+- Input
+  - **Typing input**
+    - Text selection
+      - Cut, copy, paste, etc
     - Text wraps
-- Audio played
-  - Right accent if applicable
+  - Speech input (if on)
+- Input translated
+  - **Text output**
+    - Text wraps
+  - Speech file written (if on)
+  - Speech output (if on)
+    - Right accent if applicable
+- Copy button works
 - History written to SQL DB
   - Treeview GUI displays
-- Speech recognition recognizes .wav/.mp3 recordings
-  - Mic input is readable
-  - Paste method successfully pastes recognizable audio to entry box
-- Import module switch ignores speech_recog.py
-  - Turn on switch using "Enable Speech"
-- Scrollbar in help window
+    - Copy input
+    - Copy output
