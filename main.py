@@ -53,7 +53,6 @@ def create_table():
                 db.commit()
         else:
             keep_table = False
-
         # create the table if required (not keeping old one)
         if not keep_table:
             cursor.execute(sql)
