@@ -13,11 +13,15 @@ Every contributor has had input and has contributed to every aspect of the progr
     - Implementing modules
       - Language/Accent compatibility
 - Frontend
-  - Limited work on cross platform compatibility
+  - Limited work on cross platform compatibility (failed)
 - Documentation
   - Markdown
-  - Writing
+  - Writing and 
   - License
+- Binary
+- Research
+  - Compiling
+  - Organizing directory
 
 ## Rishan
 

@@ -1,5 +1,12 @@
 # Brainstorm
 
+## Software
+
+VSCode or PyCharm
+
+- Replit can not run some modules
+- Github functionality is built into VSCode and PyCharm
+
 ## Ideas
 
 ### Chatbot?

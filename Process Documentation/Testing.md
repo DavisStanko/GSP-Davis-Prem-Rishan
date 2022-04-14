@@ -1,5 +1,7 @@
 # Testing
 
+**Testing done on non-mac machines should ignore minor front end issues.**
+
 ## Checks
 
 - **GUI displays**

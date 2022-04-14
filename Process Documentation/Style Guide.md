@@ -9,3 +9,7 @@ Double quotes
 Tab to indent
 
 AutoPep8 formatting
+
+Comment often
+
+Many try statements to avoid fatal errors

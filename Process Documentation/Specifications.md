@@ -1,4 +1,4 @@
-# Planning
+# Specifications
 
 ## Translator
 
