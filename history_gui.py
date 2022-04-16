@@ -73,9 +73,9 @@ def create_history_window():
             input_box.insert(0, values[0])
             translation_box.insert(0, values[1])
 
-            """# Make entries unable to edit
+            # Make entries unable to edit
             input_box.config(state=DISABLED)
-            translation_box.config(state=DISABLED)"""
+            translation_box.config(state=DISABLED)
 
         except IndexError:
             pass
